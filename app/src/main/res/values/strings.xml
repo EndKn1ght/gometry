@@ -3,4 +3,25 @@
     <string name="home">Home</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="profile">Profile</string>
+    <string name="geometry_name">Geometry Name</string>
+    <string name="theory">Theory</string>
+    <string name="dummy_theory">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="surface_area">Surface Area :</string>
+    <string name="formula">Formula</string>
+    <string name="volume">Volume :</string>
+    <string name="play_augmented_reality">Play Augmented Reality</string>
+    <string name="take_quiz">Take Quiz</string>
+    <!-- List of Geometry Data -->
+    <string-array name="name">
+        <item>Cube</item>
+        <item>Block</item>
+    </string-array>
+    <string-array name="color_scheme">
+        <item>#EBC000</item>
+        <item>#00BBF9</item>
+    </string-array>
+    <string-array name="preview">
+        <item>@drawable/cube</item>
+        <item>@drawable/block</item>
+    </string-array>
 </resources>
