@@ -11,6 +11,13 @@
     <string name="volume">Volume :</string>
     <string name="play_augmented_reality">Play Augmented Reality</string>
     <string name="take_quiz">Take Quiz</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="login_caption">Let\'s start learning geometry</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="error_sign_in">Sign in failed!</string>
+    <string name="success_sign_in">Sign in successfully!</string>
+    <string name="message_confirmation">Are you sure?</string>
+    <string name="yes">Yes</string>
     <!-- List of Geometry Data -->
     <string-array name="name">
         <item>Cube</item>

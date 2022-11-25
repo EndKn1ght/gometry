@@ -1,11 +1,11 @@
-package com.example.capstonegometry.ui.detail
+package com.capstone.gometry.ui.detail
 
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.capstonegometry.databinding.ActivityDetailBinding
-import com.example.capstonegometry.model.Geometry
+import com.capstone.gometry.databinding.ActivityDetailBinding
+import com.capstone.gometry.model.Geometry
 import java.io.Serializable
 
 class DetailActivity : AppCompatActivity() {

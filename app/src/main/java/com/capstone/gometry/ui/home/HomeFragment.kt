@@ -1,4 +1,4 @@
-package com.example.capstonegometry.ui.home
+package com.capstone.gometry.ui.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.capstonegometry.R
-import com.example.capstonegometry.adapter.GeometryAdapter
-import com.example.capstonegometry.databinding.FragmentHomeBinding
-import com.example.capstonegometry.model.Geometry
-import com.example.capstonegometry.ui.detail.DetailActivity
-import com.example.capstonegometry.ui.detail.DetailActivity.Companion.EXTRA_DETAIL
+import com.capstone.gometry.R
+import com.capstone.gometry.adapter.GeometryAdapter
+import com.capstone.gometry.databinding.FragmentHomeBinding
+import com.capstone.gometry.model.Geometry
+import com.capstone.gometry.ui.detail.DetailActivity
+import com.capstone.gometry.ui.detail.DetailActivity.Companion.EXTRA_DETAIL
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -33,7 +33,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun init() {
-        val geometryAdapter = GeometryAdapter(listOfGeometry)
+        val geometryAdapter = GeometryAdapter()
+        geometryAdapter.submitList(listOfGeometry)
+
         val recyclerView = binding?.rvGeometry
         recyclerView?.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -59,6 +61,7 @@ class HomeFragment : Fragment() {
             val listOfGeometry = ArrayList<Geometry>()
             for (i in dataName.indices) {
                 val geometry = Geometry(
+                    i.toString(),
                     dataName[i],
                     dataColorScheme[i],
                     dataPreview.getResourceId(i, -1)

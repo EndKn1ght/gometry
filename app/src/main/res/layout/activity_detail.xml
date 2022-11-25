@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail.DetailActivity">
+    tools:context="com.capstone.gometry.ui.detail.DetailActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:src="@drawable/dummy_geometry"/>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_subtitle_theory"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_preview" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_theory"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_subtitle_theory"
             tools:text="@string/dummy_theory" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_subtitle_formula"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_theory" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_label_surface_area"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_label_surface_area"
             tools:src="@drawable/dummy_formula"/>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_label_volume"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -113,28 +113,26 @@
             app:layout_constraintTop_toBottomOf="@id/tv_label_volume"
             tools:src="@drawable/dummy_formula"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_play_ar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="@string/play_augmented_reality"
             android:textSize="16sp"
-            android:textStyle="bold"
             android:textAllCaps="false"
             android:layout_marginTop="24dp"
             android:layout_marginHorizontal="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_volume_formula" />
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_take_quiz"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="@string/take_quiz"
             android:textSize="16sp"
-            android:textStyle="bold"
             android:textAllCaps="false"
             android:layout_marginTop="2dp"
             android:layout_marginHorizontal="16dp"

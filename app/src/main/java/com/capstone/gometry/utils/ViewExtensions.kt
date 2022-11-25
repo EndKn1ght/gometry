@@ -1,4 +1,4 @@
-package com.example.capstonegometry.utils
+package com.capstone.gometry.utils
 
 import android.content.Context
 import android.widget.ImageView

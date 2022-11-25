@@ -1,11 +1,11 @@
-package com.example.capstonegometry.ui.main
+package com.capstone.gometry.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.example.capstonegometry.R
-import com.example.capstonegometry.databinding.ActivityMainBinding
+import com.capstone.gometry.R
+import com.capstone.gometry.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

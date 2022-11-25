@@ -1,11 +1,11 @@
-package com.example.capstonegometry.ui.leaderboard
+package com.capstone.gometry.ui.leaderboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.capstonegometry.databinding.FragmentLeaderboardBinding
+import com.capstone.gometry.databinding.FragmentLeaderboardBinding
 
 class LeaderboardFragment : Fragment() {
     private var _binding: FragmentLeaderboardBinding? = null

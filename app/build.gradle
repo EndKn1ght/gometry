@@ -1,13 +1,14 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
 
 android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.capstonegometry"
+        applicationId "com.capstone.gometry"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -50,6 +51,11 @@ dependencies {
 
     // Glide Image Processing
     implementation 'com.github.bumptech.glide:glide:4.14.2'
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:31.1.0')
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.android.gms:play-services-auth:20.4.0'
 
     // Testing
     testImplementation 'junit:junit:4.13.2'

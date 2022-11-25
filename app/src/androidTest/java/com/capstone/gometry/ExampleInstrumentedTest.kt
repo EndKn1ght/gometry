@@ -1,4 +1,4 @@
-package com.example.capstonegometry
+package com.capstone.gometry
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

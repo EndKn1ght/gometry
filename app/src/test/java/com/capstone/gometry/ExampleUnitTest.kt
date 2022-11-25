@@ -1,4 +1,4 @@
-package com.example.capstonegometry
+package com.capstone.gometry
 
 import org.junit.Test
 
