@@ -55,7 +55,6 @@ class HomeFragment : Fragment() {
     private val listOfGeometry: ArrayList<Geometry>
         get() {
             val dataName = resources.getStringArray(R.array.name)
-            val dataColorScheme = resources.getStringArray(R.array.color_scheme)
             val dataPreview = resources.obtainTypedArray(R.array.preview)
 
             val listOfGeometry = ArrayList<Geometry>()
@@ -63,7 +62,6 @@ class HomeFragment : Fragment() {
                 val geometry = Geometry(
                     i.toString(),
                     dataName[i],
-                    dataColorScheme[i],
                     dataPreview.getResourceId(i, -1)
                 )
                 listOfGeometry.add(geometry)

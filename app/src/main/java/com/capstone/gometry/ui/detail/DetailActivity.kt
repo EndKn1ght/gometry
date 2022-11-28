@@ -6,14 +6,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.gometry.databinding.ActivityDetailBinding
 import com.capstone.gometry.model.Geometry
+import com.capstone.gometry.utils.viewBinding
 import java.io.Serializable
 
 class DetailActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityDetailBinding
+    private val binding by viewBinding(ActivityDetailBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
 

@@ -1,7 +1,6 @@
 package com.capstone.gometry.adapter
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -20,7 +19,6 @@ class GeometryAdapter : ListAdapter<Geometry, GeometryAdapter.ViewHolder>(DiffUt
                 binding.apply {
                     tvName.text = geometry.name
                     ivPreview.setImageFromResource(context, geometry.preview)
-                    root.setCardBackgroundColor(Color.parseColor(geometry.colorScheme))
                     root.setOnClickListener {
                         onStartActivityCallback.onStartActivityCallback(geometry)
                     }

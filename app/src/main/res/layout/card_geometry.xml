@@ -9,6 +9,7 @@
     android:layout_marginBottom="16dp"
     android:clipToPadding="false"
     app:cardCornerRadius="16dp"
+    app:cardBackgroundColor="@color/purple_500"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent">
@@ -41,6 +42,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:textSize="32sp"
+            android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_preview"

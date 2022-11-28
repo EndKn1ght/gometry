@@ -9,6 +9,7 @@ import com.capstone.gometry.R
 import com.capstone.gometry.databinding.ActivityAuthBinding
 import com.capstone.gometry.ui.main.MainActivity
 import com.capstone.gometry.utils.MessageUtility.showToast
+import com.capstone.gometry.utils.viewBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -20,7 +21,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class AuthActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityAuthBinding
+    private val binding by viewBinding(ActivityAuthBinding::inflate)
+
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var btnSignInWithGoogle: MaterialButton
@@ -39,7 +41,6 @@ class AuthActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
 

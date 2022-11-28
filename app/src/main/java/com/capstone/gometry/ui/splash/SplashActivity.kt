@@ -21,12 +21,10 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun determineScreenDirection(authenticated: Boolean) {
-        if (authenticated) Intent(this@SplashActivity, MainActivity::class.java).also {
-            startActivity(it)
-            finish()
-        } else Intent(this@SplashActivity, AuthActivity::class.java).also {
-            startActivity(it)
-            finish()
-        }
+        Intent(this@SplashActivity, if (authenticated) MainActivity::class.java else AuthActivity::class.java)
+            .also {
+                startActivity(it)
+                finish()
+            }
     }
 }
