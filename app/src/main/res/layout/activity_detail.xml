@@ -5,140 +5,204 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    android:background="@color/gray_100"
+    android:fillViewport="true"
     tools:context="com.capstone.gometry.ui.detail.DetailActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp">
-        <ImageView
-            android:id="@+id/iv_preview"
+        <View
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:background="@color/purple_500"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/geometry_name"
-            android:src="@drawable/dummy_geometry"
+            android:layout_marginTop="24dp"
+            android:layout_marginHorizontal="24dp"
+            android:textSize="32sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_close"
+            tools:text="@string/app_name" />
+        <ImageButton
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:elevation="2dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_close"
+            android:background="@drawable/image_button"
+            android:contentDescription="@string/close"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:src="@drawable/dummy_geometry"/>
-
+            app:layout_constraintBottom_toBottomOf="@id/tv_name"
+            app:tint="@color/gray_800" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cl_preview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="24dp"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <ImageView
+                android:id="@+id/iv_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/dummy_geometry"
+                tools:src="@drawable/dummy_geometry"/>
+        </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_subtitle_theory"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="24dp"
             android:text="@string/theory"
+            android:textColor="@color/gray_800"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_preview" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_theory"
+            app:layout_constraintTop_toBottomOf="@id/cl_preview" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cl_theory"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:text="@string/dummy_theory"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginHorizontal="24dp"
+            app:cardCornerRadius="4dp"
             app:layout_constraintTop_toBottomOf="@id/tv_subtitle_theory"
-            tools:text="@string/dummy_theory" />
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_theory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="16dp"
+                android:text="@string/dummy_theory"
+                android:textColor="@color/gray_800"
+                android:textSize="16sp" />
+        </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_subtitle_formula"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="24dp"
             android:text="@string/formula"
             android:textSize="20sp"
+            android:textColor="@color/gray_800"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_theory" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_label_surface_area"
+            app:layout_constraintTop_toBottomOf="@id/cl_theory" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cl_formula"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:text="@string/surface_area"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:layout_marginTop="4dp"
+            android:layout_marginHorizontal="24dp"
+            app:cardCornerRadius="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_subtitle_formula" />
-
-
-        <ImageView
-            android:id="@+id/iv_surface_area_formula"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="16dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/surface_area"
-            android:src="@drawable/dummy_formula"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_label_surface_area"
-            tools:src="@drawable/dummy_formula"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_label_volume"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginHorizontal="16dp"
-            android:text="@string/volume"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_surface_area_formula" />
-
-        <ImageView
-            android:id="@+id/iv_volume_formula"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="16dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/surface_area"
-            android:src="@drawable/dummy_formula"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_label_volume"
-            tools:src="@drawable/dummy_formula"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle_formula">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="16dp">
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_label_surface_area"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/surface_area"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray_800"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+                <ImageView
+                    android:id="@+id/iv_surface_area_formula"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="4dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/surface_area"
+                    android:src="@drawable/dummy_formula"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_label_surface_area"
+                    tools:src="@drawable/dummy_formula"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_label_volume"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/volume"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray_800"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_surface_area_formula" />
+                <ImageView
+                    android:id="@+id/iv_volume_formula"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="4dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/surface_area"
+                    android:src="@drawable/dummy_formula"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_label_volume"
+                    tools:src="@drawable/dummy_formula"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_play_ar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="@string/play_augmented_reality"
-            android:textSize="16sp"
-            android:textAllCaps="false"
             android:layout_marginTop="24dp"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="8dp"
+            android:padding="10dp"
+            android:text="@string/play_ar"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_volume_formula" />
+            app:layout_constraintEnd_toStartOf="@id/btn_exam"
+            app:layout_constraintTop_toBottomOf="@id/cl_formula" />
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_take_quiz"
+            android:id="@+id/btn_exam"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
             android:padding="10dp"
-            android:text="@string/take_quiz"
+            android:text="@string/quiz"
             android:textSize="16sp"
-            android:textAllCaps="false"
-            android:layout_marginTop="2dp"
-            android:layout_marginHorizontal="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_play_ar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_play_ar" />
-
+            app:layout_constraintTop_toBottomOf="@id/cl_formula" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

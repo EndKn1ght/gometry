@@ -10,10 +10,10 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/navigation_leaderboard"
-        android:name="com.capstone.gometry.ui.leaderboard.LeaderboardFragment"
-        android:label="fragment_leaderboard"
-        tools:layout="@layout/fragment_leaderboard" />
+        android:id="@+id/navigation_play_ar"
+        android:name="com.capstone.gometry.ui.play_ar.PlayARFragment"
+        android:label="PlayARFragment"
+        tools:layout="@layout/fragment_play_ar"/>
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.capstone.gometry.ui.profile.ProfileFragment"

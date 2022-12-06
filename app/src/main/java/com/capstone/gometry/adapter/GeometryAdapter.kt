@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.capstone.gometry.R
 import com.capstone.gometry.databinding.CardGeometryBinding
 import com.capstone.gometry.model.Geometry
 import com.capstone.gometry.utils.ViewExtensions.setImageFromResource
@@ -18,6 +19,9 @@ class GeometryAdapter : ListAdapter<Geometry, GeometryAdapter.ViewHolder>(DiffUt
             fun bind(context: Context, geometry: Geometry) {
                 binding.apply {
                     tvName.text = geometry.name
+                    tvPoint.text =
+                        if (geometry.complete) context.getString(R.string.geometry_complete)
+                        else context.getString(R.string.default_point)
                     ivPreview.setImageFromResource(context, geometry.preview)
                     root.setOnClickListener {
                         onStartActivityCallback.onStartActivityCallback(geometry)

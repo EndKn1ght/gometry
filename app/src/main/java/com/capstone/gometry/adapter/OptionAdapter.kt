@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.gometry.R
 import com.capstone.gometry.databinding.ItemOptionBinding
+import com.capstone.gometry.utils.ViewExtensions.setBold
 
 class OptionAdapter(private val options: List<String>) : RecyclerView.Adapter<OptionAdapter.ViewHolder>() {
     var answer: String = ""
@@ -14,11 +15,14 @@ class OptionAdapter(private val options: List<String>) : RecyclerView.Adapter<Op
 
     inner class ViewHolder(private var binding: ItemOptionBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(option: String) {
-            binding.tvOption.text = option
+            binding.tvOption.apply {
+                text = option
+                setBold(selectedOption == option)
+            }
             binding.root.apply {
                 setBackgroundResource(
-                    if (selectedOption == option) R.drawable.item_option_selected_background
-                    else R.drawable.item_option_background
+                    if (selectedOption == option) R.drawable.background_purple_200
+                    else R.drawable.background_white
                 )
                 setOnClickListener {
                     if (!isChecked) {
@@ -28,9 +32,19 @@ class OptionAdapter(private val options: List<String>) : RecyclerView.Adapter<Op
                 }
             }
 
-            if (isChecked && option == answer) binding.root.setBackgroundResource(
-                R.drawable.item_option_selected_background
-            )
+            if (isChecked && option == answer) {
+                binding.apply {
+                    tvOption.setBold(true)
+                    root.setBackgroundResource(R.drawable.background_teal_200)
+                }
+            }
+
+            if (isChecked && selectedOption == option && option != answer) {
+                binding.apply {
+                    tvOption.setBold(true)
+                    root.setBackgroundResource(R.drawable.background_red_200)
+                }
+            }
         }
     }
 

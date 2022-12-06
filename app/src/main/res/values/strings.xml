@@ -1,33 +1,79 @@
 <resources>
     <string name="app_name">GOMetry</string>
-    <string name="home">Home</string>
+    <string name="home">Beranda</string>
     <string name="leaderboard">Leaderboard</string>
-    <string name="profile">Profile</string>
-    <string name="geometry_name">Geometry Name</string>
-    <string name="theory">Theory</string>
+    <string name="profile">Profil</string>
+    <string name="user_profile">Profil Pengguna</string>
     <string name="dummy_theory">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
-    <string name="surface_area">Surface Area :</string>
-    <string name="formula">Formula</string>
-    <string name="volume">Volume :</string>
-    <string name="play_augmented_reality">Play Augmented Reality</string>
     <string name="take_quiz">Take Quiz</string>
-    <string name="sign_in_with_google">Sign in with Google</string>
-    <string name="login_caption">Let\'s start learning geometry</string>
-    <string name="sign_out">Sign Out</string>
-    <string name="error_sign_in">Sign in failed!</string>
-    <string name="success_sign_in">Sign in successfully!</string>
-    <string name="message_confirmation">Are you sure?</string>
-    <string name="yes">Yes</string>
-    <string name="check">Check</string>
-    <string name="_continue">Continue</string>
-    <string name="finish">Finish</string>
+    <string name="sign_in_with_google">Masuk Dengan Google</string>
+    <string name="auth_caption">Mari mulai belajar geometri</string>
+    <string name="sign_out">Keluar</string>
+    <string name="error_sign_in">Gagal masuk!</string>
+    <string name="success_sign_in">Berhasil masuk!</string>
+    <string name="message_confirmation">Apa kamu yakin?</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="check">Periksa</string>
+    <string name="_continue">Lanjutkan</string>
+    <string name="finish">Selesai</string>
+    <string name="surface_area">Luas Permukaan</string>
+    <string name="volume">Volume</string>
+    <string name="play_ar">Mainkan AR</string>
+    <string name="exam">Latihan</string>
+    <string name="close">Keluar</string>
+    <string name="theory">Teori</string>
+    <string name="formula">Rumus</string>
+    <string name="congrats_success">Selamat Kamu Lulus</string>
+    <string name="congrats_failure">Maaf, Kamu Belum Lulus</string>
+    <string name="back_to_material">Kembali Ke Materi</string>
+    <string name="retry">Coba Lagi</string>
+    <string name="you_get_point">Kamu Mendapat %d Poin</string>
+    <string name="material_list">Daftar Materi</string>
+    <string name="default_point">100 Poin</string>
+    <string name="geometry_complete">Diselesaikan</string>
+    <string name="alert_empty_selected_option">Jawaban Kosong!</string>
+    <string name="message_empty_selected_option">Silakan pilih salah satu opsi</string>
+    <string name="ok">Oke</string>
+    <string name="quiz">Quis</string>
     <!-- List of Geometry Data -->
+    <string-array name="id">
+        <item>cube</item>
+        <item>beam</item>
+        <item>triangular_pyramid</item>
+        <item>ball</item>
+        <item>cone</item>
+        <item>tube</item>
+        <item>triangular_prism</item>
+    </string-array>
     <string-array name="name">
-        <item>Cube</item>
-        <item>Block</item>
+        <item>Kubus</item>
+        <item>Balok</item>
+        <item>Limas Segitiga</item>
+        <item>Bola</item>
+        <item>Kerucut</item>
+        <item>Tabung</item>
+        <item>Prisma Segitiga</item>
     </string-array>
     <string-array name="preview">
         <item>@drawable/cube</item>
-        <item>@drawable/block</item>
+        <item>@drawable/beam</item>
+        <item>@drawable/triangular_pyramid</item>
+        <item>@drawable/ball</item>
+        <item>@drawable/cone</item>
+        <item>@drawable/tube</item>
+        <item>@drawable/prism</item>
     </string-array>
+    <string-array name="model_3d">
+        <item>cube.glb</item>
+        <item>beam.glb</item>
+        <item>triangular_pyramid.glb</item>
+        <item>ball.glb</item>
+        <item>cone.glb</item>
+        <item>tube.glb</item>
+        <item>triangular_prism.glb</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ar">AR</string>
 </resources>

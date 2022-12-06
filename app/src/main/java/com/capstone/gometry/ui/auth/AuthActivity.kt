@@ -61,9 +61,9 @@ class AuthActivity : AppCompatActivity() {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this@AuthActivity) { task ->
-                val user = firebaseAuth.currentUser
+                val currentUser = firebaseAuth.currentUser
 
-                if (task.isSuccessful && user != null) {
+                if (task.isSuccessful && currentUser != null) {
                     showToast(this@AuthActivity, getString(R.string.success_sign_in))
                     Intent(this@AuthActivity, MainActivity::class.java).also {
                         startActivity(it)
