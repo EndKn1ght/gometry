@@ -24,20 +24,35 @@
     <string name="close">Keluar</string>
     <string name="theory">Teori</string>
     <string name="formula">Rumus</string>
-    <string name="congrats_success">Selamat Kamu Lulus</string>
-    <string name="congrats_failure">Maaf, Kamu Belum Lulus</string>
+    <string name="congrats_success">Selamat! Kamu Lulus</string>
+    <string name="congrats_have_passed_before">Kamu Sudah Lulus!</string>
+    <string name="congrats_failure">Maaf, Kamu Belum Lulus!</string>
     <string name="back_to_material">Kembali Ke Materi</string>
     <string name="retry">Coba Lagi</string>
     <string name="you_get_point">Kamu Mendapat %d Poin</string>
+    <string name="you_get_medal">Kamu Mendapat %s</string>
     <string name="material_list">Daftar Materi</string>
     <string name="default_point">100 Poin</string>
-    <string name="geometry_complete">Diselesaikan</string>
+    <string name="geometry_passed">Lulus</string>
     <string name="alert_empty_selected_option">Jawaban Kosong!</string>
     <string name="message_empty_selected_option">Silakan pilih salah satu opsi</string>
     <string name="ok">Oke</string>
-    <string name="quiz">Quis</string>
+    <string name="quiz">Kuis</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ar">AR</string>
+    <string name="locked">Terkunci</string>
+    <string name="message_locked_geometry">Anda harus lulus kuis bangun ruang sebelumnya!</string>
+    <string name="label_total_point">Total Poin</string>
+    <string name="label_total_medal">Total Medali</string>
+    <string name="current_point">%s Poin</string>
+    <string name="achievement">Pencapaian</string>
+    <string name="empty_achievement">Anda belum memiliki pencapaian apapun.</string>
+    <string name="message_empty_question">Tidak ada data pertanyaan di server!</string>
+    <string name="alert_error">Kesalahan</string>
+    <string name="ranking">Peringkat</string>
+
     <!-- List of Geometry Data -->
-    <string-array name="id">
+    <string-array name="geometry_id">
         <item>cube</item>
         <item>beam</item>
         <item>triangular_pyramid</item>
@@ -46,7 +61,7 @@
         <item>tube</item>
         <item>triangular_prism</item>
     </string-array>
-    <string-array name="name">
+    <string-array name="geometry_name">
         <item>Kubus</item>
         <item>Balok</item>
         <item>Limas Segitiga</item>
@@ -55,16 +70,34 @@
         <item>Tabung</item>
         <item>Prisma Segitiga</item>
     </string-array>
-    <string-array name="preview">
-        <item>@drawable/cube</item>
-        <item>@drawable/beam</item>
-        <item>@drawable/triangular_pyramid</item>
-        <item>@drawable/ball</item>
-        <item>@drawable/cone</item>
-        <item>@drawable/tube</item>
-        <item>@drawable/prism</item>
+    <string-array name="geometry_preview">
+        <item>@drawable/preview_cube</item>
+        <item>@drawable/preview_beam</item>
+        <item>@drawable/preview_triangular_pyramid</item>
+        <item>@drawable/preview_ball</item>
+        <item>@drawable/preview_cone</item>
+        <item>@drawable/preview_tube</item>
+        <item>@drawable/preview_triangular_prism</item>
     </string-array>
-    <string-array name="model_3d">
+    <string-array name="geometry_image">
+        <item>@drawable/image_cube</item>
+        <item>@drawable/image_beam</item>
+        <item>@drawable/image_triangular_pyramid</item>
+        <item>@drawable/image_ball</item>
+        <item>@drawable/image_cone</item>
+        <item>@drawable/image_tube</item>
+        <item>@drawable/image_triangular_prism</item>
+    </string-array>
+    <string-array name="geometry_theory">
+        <item>Kubus adalah bangun ruang tiga dimensi yang dibatasi oleh enam bidang sisi yang kongruen berbentuk bujur sangkar. Kubus memiliki 6 sisi, 12 rusuk, dan 8 titik sudut.</item>
+        <item>Balok adalah bangun ruang tiga dimensi yang dibentuk oleh tiga pasang persegi atau persegi panjang, dengan paling tidak satu pasang di antaranya berukuran berbeda. Balok memiliki 6 sisi, 12 rusuk, dan 8 titik sudut.</item>
+        <item>Limas segitiga adalah bangun ruang yang memiliki bidang alas dengan bentuk segitiga. Limas segitiga menjadi bangun yang dibatasi oleh sebuah alas bidang banyak dan bidang segitiga yang alasnya berimpit dengan sisi-sisi bidang banyak tersebut. Sedangkan titik puncaknya berhimpit disebuah titik yang terletak diluar bidang banyak tersebut.</item>
+        <item>Bola adalah bangun ruang tiga dimensi yang terbentuk dari himpunan titik dalam dimensi tiga yang memiliki jarak sama terhadap titik tertentu yang disebut pusat bola.</item>
+        <item>Kerucut adalah bangun ruang yang mempunyai sebuah alas yang berbentuk lingkaran dengan selimut yang memiliki irisan dari lingkaran.\nSisi tegak pada kerucut ini berupa bidang miring yang disebut selimut kerucut. Sisi lainnya disebut alas kerucut. Maka dapat disimpulkan, bahwa kerucut hanya memiliki 2 sisi, dan satu rusuk.</item>
+        <item>Tabung adalah bangun ruang tiga dimensi yang dibentuk oleh 2 buah lingkaran identik yang sejajar dan sebuah persegi panjang yang mengelilingi kedua lingkaran tersebut.</item>
+        <item>Prisma merupakan bentuk bangun ruang yang identik dengan semua sisi semuanya datar. Prisma memiliki beberapa jenis, dimana nama prisma sesuai dengan bentuk sisi alas dan tutupnya.</item>
+    </string-array>
+    <string-array name="geometry_model_3d">
         <item>cube.glb</item>
         <item>beam.glb</item>
         <item>triangular_pyramid.glb</item>
@@ -73,7 +106,21 @@
         <item>tube.glb</item>
         <item>triangular_prism.glb</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="ar">AR</string>
+
+    <!-- List of Achievement Data -->
+    <string-array name="achievement_id">
+        <item>beginner</item>
+        <item>skilled</item>
+        <item>proficient</item>
+    </string-array>
+    <string-array name="achievement_name">
+        <item>Medali Pemula</item>
+        <item>Medali Terampil</item>
+        <item>Medali Mahir</item>
+    </string-array>
+    <string-array name="achievement_medal">
+        <item>@drawable/medal_beginner</item>
+        <item>@drawable/medal_skilled</item>
+        <item>@drawable/medal_proficient</item>
+    </string-array>
 </resources>

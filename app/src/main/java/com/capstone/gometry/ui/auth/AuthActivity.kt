@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.capstone.gometry.R
 import com.capstone.gometry.databinding.ActivityAuthBinding
 import com.capstone.gometry.ui.main.MainActivity
@@ -59,18 +60,20 @@ class AuthActivity : AppCompatActivity() {
 
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
-        firebaseAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this@AuthActivity) { task ->
-                val currentUser = firebaseAuth.currentUser
+        lifecycleScope.launchWhenResumed {
+            firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this@AuthActivity) { task ->
+                    val currentUser = firebaseAuth.currentUser
 
-                if (task.isSuccessful && currentUser != null) {
-                    showToast(this@AuthActivity, getString(R.string.success_sign_in))
-                    Intent(this@AuthActivity, MainActivity::class.java).also {
-                        startActivity(it)
-                        finish()
-                    }
-                } else showErrorOccurred()
-            }
+                    if (task.isSuccessful && currentUser != null) {
+                        showToast(this@AuthActivity, getString(R.string.success_sign_in))
+                        Intent(this@AuthActivity, MainActivity::class.java).also {
+                            startActivity(it)
+                            finish()
+                        }
+                    } else showErrorOccurred()
+                }
+        }
     }
 
     private fun signInWithGoogle() {

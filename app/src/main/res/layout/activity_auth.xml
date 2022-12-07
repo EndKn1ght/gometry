@@ -26,12 +26,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <com.google.android.material.textview.MaterialTextView
+            style="@style/TextCaptionBig"
             android:id="@+id/tv_caption_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/auth_caption"
-            android:textSize="20sp"
             android:textColor="@color/white"
             android:textAlignment="center"
             app:layout_constraintTop_toBottomOf="@id/iv_logo"

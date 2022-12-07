@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.gometry.BuildConfig
 import com.capstone.gometry.R
@@ -21,11 +23,11 @@ import com.capstone.gometry.utils.ViewExtensions.setVisible
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding
-
     private lateinit var geometryAdapter: GeometryAdapter
 
     private val launchPostActivity = registerForActivityResult(
@@ -58,58 +60,88 @@ class HomeFragment : Fragment() {
 
         geometryAdapter.setOnStartActivityCallback(object: GeometryAdapter.OnStartActivityCallback {
             override fun onStartActivityCallback(geometry: Geometry) {
-                Intent(requireContext(), DetailActivity::class.java).also { intent ->
-                    intent.putExtra(EXTRA_DETAIL, geometry)
-                    launchPostActivity.launch(intent)
-                }
+                if (geometry.locked)
+                    showAlertLockedGeometry()
+                else
+                    Intent(requireContext(), DetailActivity::class.java).also { intent ->
+                        intent.putExtra(EXTRA_DETAIL, geometry)
+                        launchPostActivity.launch(intent)
+                    }
             }
         })
 
         binding?.apply {
             rvGeometry.setVisible(true)
+            shimmerLayout.stopShimmer()
             fakeRvGeometry.removeAllViews()
         }
     }
 
-    private fun getGeometriesWithUserInformation(handleAction: (List<Geometry>) -> Unit) {
-        val currentUser = Firebase.auth.currentUser!!
-        val database = Firebase.database.getReference("users").child(currentUser.uid)
-        database.get()
-            .addOnSuccessListener {
-                val user: User?
-                if (it.value == null) {
-                    user = User(
-                        id = currentUser.uid,
-                        displayName = currentUser.displayName,
-                        email = currentUser.email,
-                        photoUrl = currentUser.photoUrl.toString()
-                    )
-                    database.setValue(user)
-                } else user = it.getValue(User::class.java)
+    private fun showAlertLockedGeometry() {
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle(getString(R.string.locked))
+            setMessage(getString(R.string.message_locked_geometry))
+            setNegativeButton(getString(R.string.ok)) { _, _ -> }
+            create()
+            show()
+        }
+    }
 
-                handleAction(generateListOfGeometry(user?.geometries))
+    private fun getGeometriesWithUserInformation(handleAction: (List<Geometry>) -> Unit) {
+        lifecycleScope.launchWhenResumed {
+            launch {
+                val currentUser = Firebase.auth.currentUser!!
+                val database = Firebase.database.getReference("users").child(currentUser.uid)
+                database.get()
+                    .addOnSuccessListener {
+                        val user: User?
+                        if (it.value == null) {
+                            user = User(
+                                id = currentUser.uid,
+                                displayName = currentUser.displayName,
+                                email = currentUser.email,
+                                photoUrl = currentUser.photoUrl.toString()
+                            )
+                            database.setValue(user)
+                        } else user = it.getValue(User::class.java)
+
+                        handleAction(generateListOfGeometry(user?.geometries))
+                    }
+                    .addOnFailureListener { Log.e(TAG, it.toString()) }
             }
-            .addOnFailureListener { Log.e(TAG, it.toString()) }
+        }
     }
 
     private fun generateListOfGeometry(geometries: List<String>? = null): List<Geometry> {
         val mGeometries: ArrayList<Geometry> = arrayListOf()
-        val geometryId = resources.getStringArray(R.array.id)
-        val geometryName = resources.getStringArray(R.array.name)
-        val geometryPreview = resources.obtainTypedArray(R.array.preview)
-        val geometryModel3d = resources.getStringArray(R.array.model_3d)
+        val geometryId = resources.getStringArray(R.array.geometry_id)
+        val geometryName = resources.getStringArray(R.array.geometry_name)
+        val geometryPreview = resources.obtainTypedArray(R.array.geometry_preview)
+        val geometryImage = resources.obtainTypedArray(R.array.geometry_image)
+        val geometryTheory = resources.getStringArray(R.array.geometry_theory)
+        val geometryModel3d = resources.getStringArray(R.array.geometry_model_3d)
 
         for (i in geometryId.indices) {
+            var locked = true
+
+            if (i == 0) locked = false
+            else if (mGeometries[i-1].passed) locked = false
+
             val geometry = Geometry(
                 id = geometryId[i],
                 name = geometryName[i],
                 preview = geometryPreview.getResourceId(i, -1),
+                image = geometryImage.getResourceId(i, -1),
+                theory = geometryTheory[i],
                 model3dUrl = String.format(BuildConfig.BASE_URL_STORAGE, "models%2F${geometryModel3d[i]}"),
-                complete = if (geometries == null) false else geometryId[i] in geometries,
+                passed = if (geometries == null) false else geometryId[i] in geometries,
+                locked = locked
             )
             mGeometries.add(geometry)
+            Log.d(TAG, mGeometries.toString())
         }
         geometryPreview.recycle()
+        geometryImage.recycle()
 
         return mGeometries
     }

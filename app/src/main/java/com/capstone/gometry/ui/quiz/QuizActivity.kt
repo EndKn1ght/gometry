@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.gometry.BuildConfig
 import com.capstone.gometry.R
@@ -12,8 +13,10 @@ import com.capstone.gometry.adapter.OptionAdapter
 import com.capstone.gometry.databinding.ActivityQuizBinding
 import com.capstone.gometry.model.Question
 import com.capstone.gometry.model.User
-import com.capstone.gometry.ui.result.ResultActivity
-import com.capstone.gometry.ui.result.ResultActivity.Companion.EXTRA_SCORE
+import com.capstone.gometry.ui.result_quiz.ResultQuizActivity
+import com.capstone.gometry.ui.result_quiz.ResultQuizActivity.Companion.EXTRA_ACHIEVEMENT_ID
+import com.capstone.gometry.ui.result_quiz.ResultQuizActivity.Companion.EXTRA_HAVE_PASSED_BEFORE
+import com.capstone.gometry.ui.result_quiz.ResultQuizActivity.Companion.EXTRA_SCORE
 import com.capstone.gometry.utils.ViewExtensions.setImageFromUrl
 import com.capstone.gometry.utils.ViewExtensions.setVisible
 import com.capstone.gometry.utils.viewBinding
@@ -23,6 +26,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 class QuizActivity : AppCompatActivity() {
@@ -47,27 +51,28 @@ class QuizActivity : AppCompatActivity() {
 
         geometryId = intent.getStringExtra(EXTRA_GEOMETRY_ID)!!
 
-        val database = Firebase.database.reference
-        database
-            .child("questions")
-            .orderByChild("geometryId")
-            .equalTo(geometryId)
-            .addValueEventListener(object: ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    for (data in snapshot.children) {
-                        val question = data.getValue(Question::class.java)
-                        questions.add(question!!)
-
-                        Log.d(TAG, question.toString())
-                    }
-                    setupQuestion()
-                    showLoading(false)
+        lifecycleScope.launchWhenResumed {
+            launch {
+                val database = Firebase.database.getReference("questions")
+                database
+                    .orderByChild("geometryId")
+                    .equalTo(geometryId)
+                    .addValueEventListener(object: ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.exists()) {
+                                for (data in snapshot.children) {
+                                    questions.add(data.getValue(Question::class.java)!!)
+                                }
+                                setupQuestion()
+                                showLoading(false)
+                            } else handleAlertEmptyQuestions()
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                            Log.w(TAG, "Failed to read value.", error.toException())
+                        }
+                    })
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.w(TAG, "Failed to read value.", error.toException())
-            }
-        })
+        }
     }
 
     private fun setupQuestion() {
@@ -101,32 +106,61 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun handleFinishQuiz() {
-        val userId = Firebase.auth.currentUser?.uid.toString()
-        val database = Firebase.database.getReference("users").child(userId)
-        database.get().addOnSuccessListener {
-            val user = it.getValue(User::class.java)
-            val mScore = score.roundToInt()
+        val mScore = score.roundToInt()
 
-            val geometries = user?.geometries
-            val mGeometries: ArrayList<String> = arrayListOf()
-            geometries?.forEach { mGeometryId -> mGeometries.add(mGeometryId) }
-            if (geometryId !in mGeometries) mGeometries.add(geometryId)
+        if (mScore == 100) {
+            lifecycleScope.launchWhenResumed {
+                launch {
+                    val userId = Firebase.auth.currentUser?.uid.toString()
+                    val database = Firebase.database.getReference("users").child(userId)
 
-            val updatedData = mapOf(
-                "score" to if (user?.score != null) user.score + mScore else mScore,
-                "geometries" to mGeometries
-            )
+                    database.get().addOnSuccessListener {
+                        val user = it.getValue(User::class.java)!!
 
-            database
-                .updateChildren(updatedData)
-                .addOnSuccessListener {
-                    Intent(this@QuizActivity, ResultActivity::class.java).also { intent ->
-                        intent.putExtra(EXTRA_SCORE, mScore)
-                        intent.putExtra(EXTRA_GEOMETRY_ID, geometryId)
-                        startActivity(intent)
-                        finish()
+                        val geometries: ArrayList<String> = (user.geometries ?: arrayListOf()) as ArrayList<String>
+                        val mGeometries: ArrayList<String> = arrayListOf()
+                        geometries.forEach { mGeometryId -> mGeometries.add(mGeometryId) }
+                        if (geometryId !in mGeometries) mGeometries.add(geometryId)
+
+                        val achievement =
+                            if ("cube" in mGeometries && "beam" in mGeometries) "beginner"
+                            else if ("triangular_pyramid" in mGeometries && "ball" in mGeometries) "skilled"
+                            else if ("cone" in mGeometries && "tube" in mGeometries && "triangular_prism" in mGeometries) "proficient"
+                            else null
+                        val achievements = user.achievements
+                        val mAchievements = ArrayList<String>()
+                        achievements?.forEach{ mAchievement -> mAchievements.add(mAchievement)}
+                        if (achievement != null && achievement !in mAchievements) mAchievements.add(achievement)
+
+                        var point: Int = user.point ?: 0
+                        if (geometryId !in geometries) point += mScore
+
+                        val updatedData = mapOf(
+                            "point" to point,
+                            "geometries" to mGeometries,
+                            "achievements" to mAchievements
+                        )
+
+                        database
+                            .updateChildren(updatedData)
+                            .addOnSuccessListener {
+                                Intent(this@QuizActivity, ResultQuizActivity::class.java).also { intent ->
+                                    intent.putExtra(EXTRA_SCORE, mScore)
+                                    intent.putExtra(EXTRA_GEOMETRY_ID, geometryId)
+                                    intent.putExtra(EXTRA_HAVE_PASSED_BEFORE, geometryId in geometries)
+                                    intent.putExtra(EXTRA_ACHIEVEMENT_ID, achievement ?: "")
+                                    startActivity(intent)
+                                    finish()
+                                }
+                            }
                     }
                 }
+            }
+        } else Intent(this@QuizActivity, ResultQuizActivity::class.java).also { intent ->
+            intent.putExtra(EXTRA_SCORE, mScore)
+            intent.putExtra(EXTRA_GEOMETRY_ID, geometryId)
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -135,6 +169,16 @@ class QuizActivity : AppCompatActivity() {
             setTitle(getString(R.string.alert_empty_selected_option))
             setMessage(getString(R.string.message_empty_selected_option))
             setNegativeButton(getString(R.string.ok)) { _, _ -> }
+            create()
+            show()
+        }
+    }
+
+    private fun handleAlertEmptyQuestions() {
+        AlertDialog.Builder(this@QuizActivity).apply {
+            setTitle(getString(R.string.alert_error))
+            setMessage(getString(R.string.message_empty_question))
+            setNegativeButton(getString(R.string.ok)) { _, _ -> finish()}
             create()
             show()
         }

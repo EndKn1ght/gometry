@@ -6,14 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
+    android:background="@drawable/background_white"
     android:elevation="1dp">
     <com.google.android.material.textview.MaterialTextView
+        style="@style/Text"
         android:id="@+id/tv_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="24dp"
         android:paddingVertical="16dp"
-        android:textSize="16sp"
         android:textColor="@color/gray_800"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

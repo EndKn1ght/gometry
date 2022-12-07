@@ -9,6 +9,7 @@ import com.capstone.gometry.databinding.ActivityDetailBinding
 import com.capstone.gometry.model.Geometry
 import com.capstone.gometry.ui.quiz.QuizActivity
 import com.capstone.gometry.ui.quiz.QuizActivity.Companion.EXTRA_GEOMETRY_ID
+import com.capstone.gometry.utils.ViewExtensions.setImageFromResource
 import com.capstone.gometry.utils.viewBinding
 import java.io.Serializable
 
@@ -27,6 +28,8 @@ class DetailActivity : AppCompatActivity() {
 
         binding.apply {
             tvName.text = geometry.name
+            ivImage.setImageFromResource(this@DetailActivity, geometry.image)
+            tvTheory.text = geometry.theory
             btnClose.setOnClickListener { finish() }
             btnPlayAr.setOnClickListener { handlePlayAR(geometry.model3dUrl) }
             btnExam.setOnClickListener {

@@ -10,6 +10,7 @@ import com.capstone.gometry.R
 import com.capstone.gometry.databinding.CardGeometryBinding
 import com.capstone.gometry.model.Geometry
 import com.capstone.gometry.utils.ViewExtensions.setImageFromResource
+import com.capstone.gometry.utils.ViewExtensions.setVisible
 
 class GeometryAdapter : ListAdapter<Geometry, GeometryAdapter.ViewHolder>(DiffUtilCallback) {
     private lateinit var onStartActivityCallback: OnStartActivityCallback
@@ -17,11 +18,16 @@ class GeometryAdapter : ListAdapter<Geometry, GeometryAdapter.ViewHolder>(DiffUt
     inner class ViewHolder(private var binding: CardGeometryBinding) :
         RecyclerView.ViewHolder(binding.root) {
             fun bind(context: Context, geometry: Geometry) {
+                val tvPointText = when {
+                    geometry.passed -> context.getString(R.string.geometry_passed)
+                    geometry.locked -> context.getString(R.string.locked)
+                    else -> context.getString(R.string.default_point)
+                }
+
                 binding.apply {
                     tvName.text = geometry.name
-                    tvPoint.text =
-                        if (geometry.complete) context.getString(R.string.geometry_complete)
-                        else context.getString(R.string.default_point)
+                    tvPoint.text = tvPointText
+                    ivLocked.setVisible(geometry.locked)
                     ivPreview.setImageFromResource(context, geometry.preview)
                     root.setOnClickListener {
                         onStartActivityCallback.onStartActivityCallback(geometry)

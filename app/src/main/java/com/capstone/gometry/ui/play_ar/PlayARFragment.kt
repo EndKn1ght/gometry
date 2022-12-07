@@ -18,6 +18,24 @@ class PlayARFragment : Fragment() {
     private var _binding: FragmentPlayArBinding? = null
     private val binding get() = _binding
 
+    private val listOfGeometryAR: ArrayList<GeometryAR>
+        get() {
+            val geometryPreview = resources.obtainTypedArray(R.array.geometry_preview)
+            val geometryModel3d = resources.getStringArray(R.array.geometry_model_3d)
+
+            val listGeometryAr = ArrayList<GeometryAR>()
+            for (i in geometryModel3d.indices) {
+                val geometryAR = GeometryAR(
+                    geometryPreview.getResourceId(i, -1),
+                    String.format(BuildConfig.BASE_URL_STORAGE, "models%2F${geometryModel3d[i]}")
+                )
+                listGeometryAr.add(geometryAR)
+            }
+            geometryPreview.recycle()
+
+            return listGeometryAr
+        }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,22 +82,4 @@ class PlayARFragment : Fragment() {
         sceneViewer.setPackage("com.google.ar.core")
         startActivity(sceneViewer)
     }
-
-    private val listOfGeometryAR: ArrayList<GeometryAR>
-        get() {
-            val geometryPreview = resources.obtainTypedArray(R.array.preview)
-            val geometryModel3d = resources.getStringArray(R.array.model_3d)
-
-            val listGeometryAr = ArrayList<GeometryAR>()
-            for (i in geometryModel3d.indices) {
-                val geometryAR = GeometryAR(
-                    geometryPreview.getResourceId(i, -1),
-                    String.format(BuildConfig.BASE_URL_STORAGE, "models%2F${geometryModel3d[i]}")
-                )
-                listGeometryAr.add(geometryAR)
-            }
-            geometryPreview.recycle()
-
-            return listGeometryAr
-        }
 }

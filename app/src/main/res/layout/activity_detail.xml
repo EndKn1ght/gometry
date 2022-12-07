@@ -22,14 +22,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <com.google.android.material.textview.MaterialTextView
+            style="@style/TextHeading"
             android:id="@+id/tv_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginHorizontal="24dp"
-            android:textSize="32sp"
             android:textColor="@color/white"
-            android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_close"
@@ -43,14 +42,14 @@
             android:elevation="2dp"
             android:padding="8dp"
             android:src="@drawable/ic_close"
-            android:background="@drawable/image_button"
+            android:background="@drawable/button_image"
             android:contentDescription="@string/close"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/tv_name"
             app:tint="@color/gray_800" />
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cl_preview"
+            android:id="@+id/cl_image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -60,7 +59,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
             <ImageView
-                android:id="@+id/iv_preview"
+                android:id="@+id/iv_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitCenter"
@@ -70,6 +69,7 @@
                 tools:src="@drawable/dummy_geometry"/>
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.textview.MaterialTextView
+            style="@style/TextLabel"
             android:id="@+id/tv_subtitle_theory"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -77,11 +77,9 @@
             android:layout_marginHorizontal="24dp"
             android:text="@string/theory"
             android:textColor="@color/gray_800"
-            android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_preview" />
+            app:layout_constraintTop_toBottomOf="@id/cl_image" />
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cl_theory"
             android:layout_width="0dp"
@@ -92,26 +90,25 @@
             app:layout_constraintTop_toBottomOf="@id/tv_subtitle_theory"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
-            <com.google.android.material.textview.MaterialTextView
+            <com.capstone.gometry.view.JustifiedTextView
+                style="@style/Text"
                 android:id="@+id/tv_theory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="16dp"
-                android:text="@string/dummy_theory"
                 android:textColor="@color/gray_800"
-                android:textSize="16sp" />
+                tools:text="@string/dummy_theory"/>
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.textview.MaterialTextView
+            style="@style/TextLabel"
             android:id="@+id/tv_subtitle_formula"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginHorizontal="24dp"
             android:text="@string/formula"
-            android:textSize="20sp"
             android:textColor="@color/gray_800"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_theory" />
@@ -131,13 +128,12 @@
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="16dp">
                 <com.google.android.material.textview.MaterialTextView
+                    style="@style/TextNormalBold"
                     android:id="@+id/tv_label_surface_area"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/surface_area"
-                    android:textSize="16sp"
                     android:textColor="@color/gray_800"
-                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
@@ -153,14 +149,13 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_label_surface_area"
                     tools:src="@drawable/dummy_formula"/>
                 <com.google.android.material.textview.MaterialTextView
+                    style="@style/TextNormalBold"
                     android:id="@+id/tv_label_volume"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="@string/volume"
-                    android:textSize="16sp"
                     android:textColor="@color/gray_800"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_surface_area_formula" />
@@ -177,7 +172,6 @@
                     tools:src="@drawable/dummy_formula"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_play_ar"
             android:layout_width="0dp"

@@ -5,7 +5,7 @@ data class User(
     val displayName: String? = null,
     val email: String? = null,
     val photoUrl: String? = null,
-    val score: Int? = null,
+    val point: Int? = null,
     val achievements: List<String>? = null,
     val geometries: List<String>? = null,
 )

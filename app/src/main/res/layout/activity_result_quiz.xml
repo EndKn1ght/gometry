@@ -6,53 +6,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/purple_500"
-    tools:context=".ui.result.ResultActivity">
+    tools:context=".ui.result_quiz.ResultQuizActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="120dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cl_image"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            app:cardBackgroundColor="@color/gray_100"
-            app:cardCornerRadius="4dp"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/slime_background"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-            <ImageView
-                android:id="@+id/iv_photo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/user_profile"
-                tools:src="@tools:sample/avatars" />
-        </com.google.android.material.card.MaterialCardView>
+            tools:ignore="ContentDescription" />
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="120dp"
+            android:src="@drawable/happy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_greeting"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginHorizontal="32dp"
+            android:fontFamily="@font/roboto_bold"
             android:text="@string/congrats_success"
             android:textSize="28sp"
-            android:textStyle="bold"
             android:textColor="@color/white"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_image" />
+            app:layout_constraintTop_toBottomOf="@id/iv_image" />
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_total_score"
+            style="@style/TextBig"
+            android:id="@+id/tv_point"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:layout_marginHorizontal="32dp"
             android:text="@string/you_get_point"
-            android:textSize="20sp"
             android:textColor="@color/white"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +68,7 @@
             android:layout_marginHorizontal="32dp"
             android:backgroundTint="@color/white"
             android:text="@string/back_to_material"
-            app:layout_constraintTop_toBottomOf="@id/tv_total_score"
+            app:layout_constraintTop_toBottomOf="@id/tv_point"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
         <com.google.android.material.button.MaterialButton
@@ -75,7 +76,6 @@
             android:id="@+id/btn_retake"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:layout_marginHorizontal="32dp"
             android:backgroundTint="@color/white"
             android:text="@string/retry"
