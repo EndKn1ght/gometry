@@ -1,0 +1,87 @@
+[
+  {
+    "questions": [
+      {
+        "answer": "8",
+        "geometryId": "beam",
+        "image": null,
+        "level": "beginner",
+        "options": [
+          "4",
+          "6",
+          "8",
+          "10"
+        ],
+        "question": "Berapakah jumlah titik sudut yang ada pada balok?"
+      }
+    ]
+  },
+  {
+    "questions": [
+      {
+        "answer": "1.496",
+        "geometryId": "beam",
+        "image": null,
+        "level": "beginner",
+        "options": [
+          "1.496",
+          "1.498",
+          "1.502",
+          "1.516"
+        ],
+        "question": "Volume suatu balok dengan panjang 17 cm, lebar 11 cm, dan tinggi 8 adalah .... cm³"
+      }
+    ]
+  },
+  {
+    "questions": [
+      {
+        "answer": "V = p x l x t, L = 2 (p x l + p x t + l x t)",
+        "geometryId": "beam",
+        "image": null,
+        "level": "beginner",
+        "options": [
+          "V = p x l x t, L = p x l + p x t + l x t",
+          "V = p x l x t, L = 2 (p x l + p x t + l x t)",
+          "V = p x l x t , L = 4 (p x l + p x t)",
+          "V = p x l x t , L = 6 (p x l)"
+        ],
+        "question": "Rumus volume dan luas permukaan balok adalah"
+      }
+    ]
+  },
+  {
+    "questions": [
+      {
+        "answer": "15",
+        "geometryId": "beam",
+        "image": null,
+        "level": "beginner",
+        "options": [
+          "12",
+          "14",
+          "15",
+          "18"
+        ],
+        "question": "Volume sebuah balok adalah 3.600 cm³. Jika panjang dan tinggi balok tersebut berturut-turut 24 cm dan 10 cm, maka lebarnya adalah .... cm."
+      }
+    ]
+  },
+  {
+    "questions": [
+      {
+        "answer": "832",
+        "geometryId": "beam",
+        "image": null,
+        "level": "beginner",
+        "options": [
+          "830",
+          "832",
+          "834",
+          "836"
+        ],
+        "question": "Diketahui sebuah balok panjang sisinya 16 cm, lebarnya 8 cm, dan tingginya 12 cm. Luas permukaan balok tersebut adalah .... cm²"
+      }
+    ]
+  }
+]
