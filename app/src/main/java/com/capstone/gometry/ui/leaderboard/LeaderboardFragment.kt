@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.gometry.adapter.LeaderboardAdapter
 import com.capstone.gometry.databinding.FragmentLeaderboardBinding
 import com.capstone.gometry.model.User
+import com.capstone.gometry.utils.Constants.REF_USERS
 import com.capstone.gometry.utils.ViewExtensions.setVisible
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -44,7 +45,7 @@ class LeaderboardFragment : Fragment() {
 
         lifecycleScope.launchWhenResumed {
             launch {
-                val database = Firebase.database.getReference("users")
+                val database = Firebase.database.getReference(REF_USERS)
                 database.get()
                     .addOnSuccessListener { snapshot ->
                         for (data in snapshot.children) {

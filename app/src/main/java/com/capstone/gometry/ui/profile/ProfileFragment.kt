@@ -15,6 +15,7 @@ import com.capstone.gometry.databinding.FragmentProfileBinding
 import com.capstone.gometry.model.Achievement
 import com.capstone.gometry.model.User
 import com.capstone.gometry.ui.auth.AuthActivity
+import com.capstone.gometry.utils.Constants.REF_USERS
 import com.capstone.gometry.utils.ViewExtensions.setImageFromUrl
 import com.capstone.gometry.utils.ViewExtensions.setVisible
 import com.google.firebase.auth.FirebaseAuth
@@ -60,7 +61,7 @@ class ProfileFragment : Fragment() {
         lifecycleScope.launchWhenResumed {
             launch {
                 val database = Firebase.database.reference
-                database.child("users").child(firebaseAuth?.uid!!).get()
+                database.child(REF_USERS).child(firebaseAuth?.uid!!).get()
                     .addOnSuccessListener {
                         bindViews(it.getValue(User::class.java)!!)
                         showLoading(false)
@@ -75,7 +76,7 @@ class ProfileFragment : Fragment() {
             tvName.text = user.displayName
             tvEmail.text = user.email
             tvTotalPoint.text = if (user.point == null) "0" else user.point.toString()
-            tvTotalMedal.text = if (user.achievements == null) "0" else user.achievements.size.toString()
+            tvTotalMedal.text = if (user.achievements == null) "0" else "${user.achievements.size}"
             btnSignOut.setOnClickListener { handleSignOut() }
         }
 

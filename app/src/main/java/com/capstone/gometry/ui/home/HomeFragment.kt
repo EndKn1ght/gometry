@@ -2,7 +2,6 @@ package com.capstone.gometry.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,8 @@ import com.capstone.gometry.databinding.FragmentHomeBinding
 import com.capstone.gometry.model.Geometry
 import com.capstone.gometry.model.User
 import com.capstone.gometry.ui.detail.DetailActivity
-import com.capstone.gometry.ui.detail.DetailActivity.Companion.EXTRA_DETAIL
+import com.capstone.gometry.utils.Constants.EXTRA_DETAIL
+import com.capstone.gometry.utils.Constants.REF_USERS
 import com.capstone.gometry.utils.ViewExtensions.setVisible
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
@@ -91,7 +91,7 @@ class HomeFragment : Fragment() {
         lifecycleScope.launchWhenResumed {
             launch {
                 val currentUser = Firebase.auth.currentUser!!
-                val database = Firebase.database.getReference("users").child(currentUser.uid)
+                val database = Firebase.database.getReference(REF_USERS).child(currentUser.uid)
                 database.get()
                     .addOnSuccessListener {
                         val user: User?
@@ -107,7 +107,6 @@ class HomeFragment : Fragment() {
 
                         handleAction(generateListOfGeometry(user?.geometries))
                     }
-                    .addOnFailureListener { Log.e(TAG, it.toString()) }
             }
         }
     }
@@ -119,6 +118,10 @@ class HomeFragment : Fragment() {
         val geometryPreview = resources.obtainTypedArray(R.array.geometry_preview)
         val geometryImage = resources.obtainTypedArray(R.array.geometry_image)
         val geometryTheory = resources.getStringArray(R.array.geometry_theory)
+        val geometrySurfaceArea = resources.obtainTypedArray(R.array.geometry_surface_area)
+        val geometryVolume = resources.obtainTypedArray(R.array.geometry_volume)
+        val geometryExampleQuestion = resources.getStringArray(R.array.geometry_example_question)
+        val geometryExampleAnswer = resources.obtainTypedArray(R.array.geometry_example_answer)
         val geometryModel3d = resources.getStringArray(R.array.geometry_model_3d)
 
         for (i in geometryId.indices) {
@@ -133,15 +136,21 @@ class HomeFragment : Fragment() {
                 preview = geometryPreview.getResourceId(i, -1),
                 image = geometryImage.getResourceId(i, -1),
                 theory = geometryTheory[i],
+                surfaceArea = geometrySurfaceArea.getResourceId(i, -1),
+                volume = geometryVolume.getResourceId(i, -1),
+                exampleQuestion = geometryExampleQuestion[i],
+                exampleAnswer = geometryExampleAnswer.getResourceId(i, -1),
                 model3dUrl = String.format(BuildConfig.BASE_URL_STORAGE, "models%2F${geometryModel3d[i]}"),
                 passed = if (geometries == null) false else geometryId[i] in geometries,
                 locked = locked
             )
             mGeometries.add(geometry)
-            Log.d(TAG, mGeometries.toString())
         }
         geometryPreview.recycle()
         geometryImage.recycle()
+        geometrySurfaceArea.recycle()
+        geometryVolume.recycle()
+        geometryExampleAnswer.recycle()
 
         return mGeometries
     }
@@ -149,9 +158,5 @@ class HomeFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-
-    companion object {
-        private const val TAG = "DATA FIREBASE"
     }
 }

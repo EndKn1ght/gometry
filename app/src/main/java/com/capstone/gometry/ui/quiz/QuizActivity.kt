@@ -2,7 +2,6 @@ package com.capstone.gometry.ui.quiz
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -14,9 +13,17 @@ import com.capstone.gometry.databinding.ActivityQuizBinding
 import com.capstone.gometry.model.Question
 import com.capstone.gometry.model.User
 import com.capstone.gometry.ui.result_quiz.ResultQuizActivity
-import com.capstone.gometry.ui.result_quiz.ResultQuizActivity.Companion.EXTRA_ACHIEVEMENT_ID
-import com.capstone.gometry.ui.result_quiz.ResultQuizActivity.Companion.EXTRA_HAVE_PASSED_BEFORE
-import com.capstone.gometry.ui.result_quiz.ResultQuizActivity.Companion.EXTRA_SCORE
+import com.capstone.gometry.utils.Constants.CHILD_GEOMETRY_ID
+import com.capstone.gometry.utils.Constants.EXTRA_ACHIEVEMENT_ID
+import com.capstone.gometry.utils.Constants.EXTRA_GEOMETRY_ID
+import com.capstone.gometry.utils.Constants.EXTRA_HAVE_PASSED_BEFORE
+import com.capstone.gometry.utils.Constants.EXTRA_SCORE
+import com.capstone.gometry.utils.Constants.LEVEL_KEY_BEGINNER
+import com.capstone.gometry.utils.Constants.LEVEL_KEY_PROFICIENT
+import com.capstone.gometry.utils.Constants.LEVEL_KEY_SKILLED
+import com.capstone.gometry.utils.Constants.MAX_QUESTION
+import com.capstone.gometry.utils.Constants.REF_QUESTIONS
+import com.capstone.gometry.utils.Constants.REF_USERS
 import com.capstone.gometry.utils.ViewExtensions.setImageFromUrl
 import com.capstone.gometry.utils.ViewExtensions.setVisible
 import com.capstone.gometry.utils.viewBinding
@@ -53,23 +60,27 @@ class QuizActivity : AppCompatActivity() {
 
         lifecycleScope.launchWhenResumed {
             launch {
-                val database = Firebase.database.getReference("questions")
+                val database = Firebase.database.getReference(REF_QUESTIONS)
                 database
-                    .orderByChild("geometryId")
+                    .orderByChild(CHILD_GEOMETRY_ID)
                     .equalTo(geometryId)
                     .addValueEventListener(object: ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             if (snapshot.exists()) {
+                                val resQuestions = ArrayList<Question>()
                                 for (data in snapshot.children) {
-                                    questions.add(data.getValue(Question::class.java)!!)
+                                    resQuestions.add(data.getValue(Question::class.java)!!)
                                 }
+                                resQuestions.filter { it.level == LEVEL_KEY_BEGINNER }
+                                resQuestions.shuffle()
+                                questions.addAll(resQuestions.take(MAX_QUESTION))
+
                                 setupQuestion()
                                 showLoading(false)
                             } else handleAlertEmptyQuestions()
                         }
-                        override fun onCancelled(error: DatabaseError) {
-                            Log.w(TAG, "Failed to read value.", error.toException())
-                        }
+
+                        override fun onCancelled(error: DatabaseError) {}
                     })
             }
         }
@@ -112,25 +123,25 @@ class QuizActivity : AppCompatActivity() {
             lifecycleScope.launchWhenResumed {
                 launch {
                     val userId = Firebase.auth.currentUser?.uid.toString()
-                    val database = Firebase.database.getReference("users").child(userId)
+                    val database = Firebase.database.getReference(REF_USERS).child(userId)
 
                     database.get().addOnSuccessListener {
                         val user = it.getValue(User::class.java)!!
 
                         val geometries: ArrayList<String> = (user.geometries ?: arrayListOf()) as ArrayList<String>
                         val mGeometries: ArrayList<String> = arrayListOf()
-                        geometries.forEach { mGeometryId -> mGeometries.add(mGeometryId) }
+                        mGeometries.addAll(geometries)
                         if (geometryId !in mGeometries) mGeometries.add(geometryId)
 
                         val achievement =
-                            if ("cube" in mGeometries && "beam" in mGeometries) "beginner"
-                            else if ("triangular_pyramid" in mGeometries && "ball" in mGeometries) "skilled"
-                            else if ("cone" in mGeometries && "tube" in mGeometries && "triangular_prism" in mGeometries) "proficient"
-                            else null
-                        val achievements = user.achievements
+                            if ("cone" in mGeometries && "tube" in mGeometries && "triangular_prism" in mGeometries) LEVEL_KEY_PROFICIENT
+                            else if ("triangular_pyramid" in mGeometries && "ball" in mGeometries) LEVEL_KEY_SKILLED
+                            else if ("cube" in mGeometries && "beam" in mGeometries) LEVEL_KEY_BEGINNER
+                            else ""
+                        val achievements: ArrayList<String> = (user.achievements ?: arrayListOf()) as ArrayList<String>
                         val mAchievements = ArrayList<String>()
-                        achievements?.forEach{ mAchievement -> mAchievements.add(mAchievement)}
-                        if (achievement != null && achievement !in mAchievements) mAchievements.add(achievement)
+                        mAchievements.addAll(achievements)
+                        if (achievement !in mAchievements && achievement.isNotEmpty()) mAchievements.add(achievement)
 
                         var point: Int = user.point ?: 0
                         if (geometryId !in geometries) point += mScore
@@ -144,11 +155,15 @@ class QuizActivity : AppCompatActivity() {
                         database
                             .updateChildren(updatedData)
                             .addOnSuccessListener {
+                                val extraAchievement =
+                                    if (achievement !in achievements) achievement
+                                    else ""
+
                                 Intent(this@QuizActivity, ResultQuizActivity::class.java).also { intent ->
                                     intent.putExtra(EXTRA_SCORE, mScore)
                                     intent.putExtra(EXTRA_GEOMETRY_ID, geometryId)
                                     intent.putExtra(EXTRA_HAVE_PASSED_BEFORE, geometryId in geometries)
-                                    intent.putExtra(EXTRA_ACHIEVEMENT_ID, achievement ?: "")
+                                    intent.putExtra(EXTRA_ACHIEVEMENT_ID, extraAchievement)
                                     startActivity(intent)
                                     finish()
                                 }
@@ -177,7 +192,7 @@ class QuizActivity : AppCompatActivity() {
     private fun handleAlertEmptyQuestions() {
         AlertDialog.Builder(this@QuizActivity).apply {
             setTitle(getString(R.string.alert_error))
-            setMessage(getString(R.string.message_empty_question))
+            setMessage(getString(R.string.message_empty_quiz))
             setNegativeButton(getString(R.string.ok)) { _, _ -> finish()}
             create()
             show()
@@ -203,7 +218,7 @@ class QuizActivity : AppCompatActivity() {
             }
         } else binding.clImage.setVisible(false)
         binding.tvQuestion.text = currentQuestion.question
-        optionAdapter = OptionAdapter(currentQuestion.options!!)
+        optionAdapter = OptionAdapter(currentQuestion.options!!.shuffled())
         optionAdapter.apply {
             selectedOption = ""
             isChecked = false
@@ -223,10 +238,5 @@ class QuizActivity : AppCompatActivity() {
             btnAction.setVisible(!state)
             progressCircular.setVisible(state)
         }
-    }
-
-    companion object {
-        const val EXTRA_GEOMETRY_ID = "extra_geometry_id"
-        private const val TAG = "QUIZ_ACTIVITY"
     }
 }

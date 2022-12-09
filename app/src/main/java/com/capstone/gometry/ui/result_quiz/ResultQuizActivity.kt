@@ -7,7 +7,10 @@ import com.capstone.gometry.R
 import com.capstone.gometry.databinding.ActivityResultQuizBinding
 import com.capstone.gometry.model.Achievement
 import com.capstone.gometry.ui.quiz.QuizActivity
-import com.capstone.gometry.ui.quiz.QuizActivity.Companion.EXTRA_GEOMETRY_ID
+import com.capstone.gometry.utils.Constants.EXTRA_ACHIEVEMENT_ID
+import com.capstone.gometry.utils.Constants.EXTRA_GEOMETRY_ID
+import com.capstone.gometry.utils.Constants.EXTRA_HAVE_PASSED_BEFORE
+import com.capstone.gometry.utils.Constants.EXTRA_SCORE
 import com.capstone.gometry.utils.ViewExtensions.setImageFromResource
 import com.capstone.gometry.utils.ViewExtensions.setVisible
 import com.capstone.gometry.utils.viewBinding
@@ -93,11 +96,5 @@ class ResultQuizActivity : AppCompatActivity() {
         achievementMedal.recycle()
 
         return null
-    }
-
-    companion object {
-        const val EXTRA_SCORE = "extra_score"
-        const val EXTRA_HAVE_PASSED_BEFORE = "extra_have_passed_before"
-        const val EXTRA_ACHIEVEMENT_ID = "extra_achievement"
     }
 }

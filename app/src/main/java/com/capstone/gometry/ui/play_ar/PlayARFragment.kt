@@ -1,7 +1,5 @@
 package com.capstone.gometry.ui.play_ar
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +11,7 @@ import com.capstone.gometry.R
 import com.capstone.gometry.adapter.GeometryARAdapter
 import com.capstone.gometry.databinding.FragmentPlayArBinding
 import com.capstone.gometry.model.GeometryAR
+import com.capstone.gometry.utils.HandleIntent.handlePlayAR
 
 class PlayARFragment : Fragment() {
     private var _binding: FragmentPlayArBinding? = null
@@ -66,20 +65,8 @@ class PlayARFragment : Fragment() {
 
         geometryARAdapter.setOnStartActivityCallback(object: GeometryARAdapter.OnStartActivityCallback {
             override fun onStartActivityCallback(geometryAR: GeometryAR) {
-                handlePlayAR(geometryAR.model3dUrl)
+                handlePlayAR(requireActivity(), geometryAR.model3dUrl)
             }
         })
-    }
-
-    private fun handlePlayAR(model3dUrl: String) {
-        val sceneViewer = Intent(Intent.ACTION_VIEW)
-        val intentUri = Uri.parse("https://arvr.google.com/scene-viewer/1.0")
-            .buildUpon()
-            .appendQueryParameter("file", model3dUrl)
-            .appendQueryParameter("mode", "ar_preferred")
-            .build()
-        sceneViewer.data = intentUri
-        sceneViewer.setPackage("com.google.ar.core")
-        startActivity(sceneViewer)
     }
 }

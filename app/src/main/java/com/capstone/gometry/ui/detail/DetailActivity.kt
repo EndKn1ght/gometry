@@ -1,14 +1,15 @@
 package com.capstone.gometry.ui.detail
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.gometry.databinding.ActivityDetailBinding
 import com.capstone.gometry.model.Geometry
 import com.capstone.gometry.ui.quiz.QuizActivity
-import com.capstone.gometry.ui.quiz.QuizActivity.Companion.EXTRA_GEOMETRY_ID
+import com.capstone.gometry.utils.Constants.EXTRA_DETAIL
+import com.capstone.gometry.utils.Constants.EXTRA_GEOMETRY_ID
+import com.capstone.gometry.utils.HandleIntent.handlePlayAR
 import com.capstone.gometry.utils.ViewExtensions.setImageFromResource
 import com.capstone.gometry.utils.viewBinding
 import java.io.Serializable
@@ -30,8 +31,12 @@ class DetailActivity : AppCompatActivity() {
             tvName.text = geometry.name
             ivImage.setImageFromResource(this@DetailActivity, geometry.image)
             tvTheory.text = geometry.theory
+            ivSurfaceAreaFormula.setBackgroundResource(geometry.surfaceArea)
+            ivVolumeFormula.setBackgroundResource(geometry.volume)
+            tvExampleQuestion.text = geometry.exampleQuestion
+            ivExampleAnswer.setBackgroundResource(geometry.exampleAnswer)
             btnClose.setOnClickListener { finish() }
-            btnPlayAr.setOnClickListener { handlePlayAR(geometry.model3dUrl) }
+            btnPlayAr.setOnClickListener { handlePlayAR(this@DetailActivity, geometry.model3dUrl) }
             btnExam.setOnClickListener {
                 Intent(this@DetailActivity, QuizActivity::class.java).also {
                     it.putExtra(EXTRA_GEOMETRY_ID, geometry.id)
@@ -39,22 +44,6 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun handlePlayAR(model3dUrl: String) {
-        val sceneViewer = Intent(Intent.ACTION_VIEW)
-        val intentUri = Uri.parse("https://arvr.google.com/scene-viewer/1.0")
-            .buildUpon()
-            .appendQueryParameter("file", model3dUrl)
-            .appendQueryParameter("mode", "ar_preferred")
-            .build()
-        sceneViewer.data = intentUri
-        sceneViewer.setPackage("com.google.ar.core")
-        startActivity(sceneViewer)
-    }
-
-    companion object {
-        const val EXTRA_DETAIL = "extra_detail"
     }
 }
 
