@@ -1,4 +1,4 @@
-package com.capstone.gometry.ui.quiz
+package com.capstone.gometry.ui.exam
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,21 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.gometry.BuildConfig
 import com.capstone.gometry.R
 import com.capstone.gometry.adapter.OptionAdapter
-import com.capstone.gometry.databinding.ActivityQuizBinding
+import com.capstone.gometry.databinding.ActivityExamBinding
 import com.capstone.gometry.model.Question
 import com.capstone.gometry.model.User
-import com.capstone.gometry.ui.result_quiz.ResultQuizActivity
-import com.capstone.gometry.utils.Constants.CHILD_GEOMETRY_ID
-import com.capstone.gometry.utils.Constants.EXTRA_ACHIEVEMENT_ID
-import com.capstone.gometry.utils.Constants.EXTRA_GEOMETRY_ID
-import com.capstone.gometry.utils.Constants.EXTRA_HAVE_PASSED_BEFORE
-import com.capstone.gometry.utils.Constants.EXTRA_SCORE
-import com.capstone.gometry.utils.Constants.LEVEL_KEY_BEGINNER
-import com.capstone.gometry.utils.Constants.LEVEL_KEY_PROFICIENT
-import com.capstone.gometry.utils.Constants.LEVEL_KEY_SKILLED
-import com.capstone.gometry.utils.Constants.MAX_QUESTION
-import com.capstone.gometry.utils.Constants.REF_QUESTIONS
-import com.capstone.gometry.utils.Constants.REF_USERS
+import com.capstone.gometry.ui.result_exam.ResultExamActivity
+import com.capstone.gometry.utils.Constants
 import com.capstone.gometry.utils.ViewExtensions.setImageFromUrl
 import com.capstone.gometry.utils.ViewExtensions.setVisible
 import com.capstone.gometry.utils.viewBinding
@@ -34,14 +24,14 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
-import kotlin.math.roundToInt
 
-class QuizActivity : AppCompatActivity() {
-    private val binding by viewBinding(ActivityQuizBinding::inflate)
+class ExamActivity : AppCompatActivity() {
+    private val binding by viewBinding(ActivityExamBinding::inflate)
     private val questions: ArrayList<Question> = arrayListOf()
     private var questionIndex: Int = 0
-    private var score: Float = 0F
-    private var geometryId: String = ""
+    private var score: Int = 0
+    private var examId: String = ""
+    private var examPoint: Int = 0
 
     private lateinit var optionAdapter: OptionAdapter
     private lateinit var currentQuestion: Question
@@ -56,14 +46,15 @@ class QuizActivity : AppCompatActivity() {
     private fun initialization() {
         showLoading(true)
 
-        geometryId = intent.getStringExtra(EXTRA_GEOMETRY_ID)!!
+        examId = intent.getStringExtra(Constants.EXTRA_EXAM_ID)!!
+        examPoint = intent.getIntExtra(Constants.EXTRA_EXAM_POINT, 0)
 
         lifecycleScope.launchWhenResumed {
             launch {
-                val database = Firebase.database.getReference(REF_QUESTIONS)
+                val database = Firebase.database.getReference(Constants.REF_QUESTIONS)
                 database
-                    .orderByChild(CHILD_GEOMETRY_ID)
-                    .equalTo(geometryId)
+                    .orderByChild(Constants.CHILD_LEVEL)
+                    .equalTo(examId)
                     .addValueEventListener(object: ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             if (snapshot.exists()) {
@@ -71,9 +62,8 @@ class QuizActivity : AppCompatActivity() {
                                 for (data in snapshot.children) {
                                     resQuestions.add(data.getValue(Question::class.java)!!)
                                 }
-                                resQuestions.filter { it.level == LEVEL_KEY_BEGINNER }
                                 resQuestions.shuffle()
-                                questions.addAll(resQuestions.take(MAX_QUESTION))
+                                questions.addAll(resQuestions.take(Constants.MAX_QUESTION))
 
                                 setupQuestion()
                                 showLoading(false)
@@ -110,7 +100,7 @@ class QuizActivity : AppCompatActivity() {
         }
 
         if (optionAdapter.selectedOption == optionAdapter.answer)
-            score += 100 / questions.size
+            score += examPoint / Constants.MAX_QUESTION
 
         optionAdapter.isChecked = true
         optionAdapter.updateView()
@@ -119,69 +109,34 @@ class QuizActivity : AppCompatActivity() {
     private fun handleFinishQuiz() {
         binding.btnAction.isEnabled = false
 
-        val mScore = score.roundToInt()
-        if (mScore == 100) {
-            lifecycleScope.launchWhenResumed {
-                launch {
-                    val userId = Firebase.auth.currentUser?.uid.toString()
-                    val database = Firebase.database.getReference(REF_USERS).child(userId)
+        lifecycleScope.launchWhenResumed {
+            launch {
+                val userId = Firebase.auth.currentUser?.uid.toString()
+                val database = Firebase.database.getReference(Constants.REF_USERS).child(userId)
 
-                    database.get().addOnSuccessListener {
-                        val user = it.getValue(User::class.java)!!
+                database.get().addOnSuccessListener {
+                    val user = it.getValue(User::class.java)!!
+                    var point: Int = user.point ?: 0
+                    point += score
 
-                        val geometries: ArrayList<String> = (user.geometries ?: arrayListOf()) as ArrayList<String>
-                        val mGeometries: ArrayList<String> = arrayListOf()
-                        mGeometries.addAll(geometries)
-                        if (geometryId !in mGeometries) mGeometries.add(geometryId)
-
-                        val achievement =
-                            if ("cone" in mGeometries && "tube" in mGeometries && "triangular_prism" in mGeometries) LEVEL_KEY_PROFICIENT
-                            else if ("triangular_pyramid" in mGeometries && "ball" in mGeometries) LEVEL_KEY_SKILLED
-                            else if ("cube" in mGeometries && "beam" in mGeometries) LEVEL_KEY_BEGINNER
-                            else ""
-                        val achievements: ArrayList<String> = (user.achievements ?: arrayListOf()) as ArrayList<String>
-                        val mAchievements = ArrayList<String>()
-                        mAchievements.addAll(achievements)
-                        if (achievement !in mAchievements && achievement.isNotEmpty()) mAchievements.add(achievement)
-
-                        var point: Int = user.point ?: 0
-                        if (geometryId !in geometries) point += mScore
-
-                        val updatedData = mapOf(
-                            "point" to point,
-                            "geometries" to mGeometries,
-                            "achievements" to mAchievements
-                        )
-
-                        database
-                            .updateChildren(updatedData)
-                            .addOnSuccessListener {
-                                val extraAchievement =
-                                    if (achievement !in achievements) achievement
-                                    else ""
-
-                                Intent(this@QuizActivity, ResultQuizActivity::class.java).also { intent ->
-                                    intent.putExtra(EXTRA_SCORE, mScore)
-                                    intent.putExtra(EXTRA_GEOMETRY_ID, geometryId)
-                                    intent.putExtra(EXTRA_HAVE_PASSED_BEFORE, geometryId in geometries)
-                                    intent.putExtra(EXTRA_ACHIEVEMENT_ID, extraAchievement)
-                                    startActivity(intent)
-                                    finish()
-                                }
+                    val updatedData = mapOf("point" to point)
+                    database
+                        .updateChildren(updatedData)
+                        .addOnSuccessListener {
+                            Intent(this@ExamActivity, ResultExamActivity::class.java).also { intent ->
+                                intent.putExtra(Constants.EXTRA_SCORE, score)
+                                intent.putExtra(Constants.EXTRA_EXAM_POINT, examPoint)
+                                startActivity(intent)
+                                finish()
                             }
-                    }
+                        }
                 }
             }
-        } else Intent(this@QuizActivity, ResultQuizActivity::class.java).also { intent ->
-            intent.putExtra(EXTRA_SCORE, mScore)
-            intent.putExtra(EXTRA_GEOMETRY_ID, geometryId)
-            startActivity(intent)
-            finish()
         }
     }
 
     private fun handleAlertEmptySelectedOption() {
-        AlertDialog.Builder(this@QuizActivity).apply {
+        AlertDialog.Builder(this@ExamActivity).apply {
             setTitle(getString(R.string.alert_empty_selected_option))
             setMessage(getString(R.string.message_empty_selected_option))
             setNegativeButton(getString(R.string.ok)) { _, _ -> }
@@ -191,7 +146,7 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun handleAlertEmptyQuestions() {
-        AlertDialog.Builder(this@QuizActivity).apply {
+        AlertDialog.Builder(this@ExamActivity).apply {
             setTitle(getString(R.string.alert_error))
             setMessage(getString(R.string.message_empty_quiz))
             setNegativeButton(getString(R.string.ok)) { _, _ -> finish()}
@@ -214,7 +169,7 @@ class QuizActivity : AppCompatActivity() {
         if (!currentQuestion.image.isNullOrEmpty()) {
             val url = String.format(BuildConfig.BASE_URL_STORAGE, "images%2F${currentQuestion.image}")
             binding.apply {
-                ivImage.setImageFromUrl(this@QuizActivity, url)
+                ivImage.setImageFromUrl(this@ExamActivity, url)
                 clImage.setVisible(true)
             }
         } else binding.clImage.setVisible(false)
@@ -226,11 +181,12 @@ class QuizActivity : AppCompatActivity() {
             answer = currentQuestion.answer!!
         }
         binding.rvOption.apply {
-            layoutManager = LinearLayoutManager(this@QuizActivity)
+            layoutManager = LinearLayoutManager(this@ExamActivity)
             adapter = optionAdapter
         }
     }
-    
+
+
     private fun showLoading(state: Boolean) {
         binding.apply {
             clProgressbar.setVisible(!state)

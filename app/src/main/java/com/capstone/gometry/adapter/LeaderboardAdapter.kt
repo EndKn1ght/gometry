@@ -12,6 +12,8 @@ import com.capstone.gometry.model.User
 import com.capstone.gometry.utils.ViewExtensions.setImageFromUrl
 
 class LeaderboardAdapter : ListAdapter<User, LeaderboardAdapter.ViewHolder>(DiffUtilCallback) {
+    private lateinit var onStartActivityCallback: OnStartActivityCallback
+
     inner class ViewHolder(private var binding: CardRankingBinding) :
         RecyclerView.ViewHolder(binding.root) {
             fun bind(context: Context, user: User) {
@@ -19,6 +21,9 @@ class LeaderboardAdapter : ListAdapter<User, LeaderboardAdapter.ViewHolder>(Diff
                     ivPhoto.setImageFromUrl(context, user.photoUrl!!)
                     tvName.text = user.displayName!!
                     tvPoint.text = String.format(context.getString(R.string.current_point), if (user.point == null) "0" else user.point.toString())
+                    root.setOnClickListener {
+                        onStartActivityCallback.onStartActivityCallback(user)
+                    }
                 }
             }
         }
@@ -31,6 +36,14 @@ class LeaderboardAdapter : ListAdapter<User, LeaderboardAdapter.ViewHolder>(Diff
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val user = getItem(position)
         holder.bind(holder.itemView.context, user)
+    }
+
+    fun setOnStartActivityCallback(onStartActivityCallback: OnStartActivityCallback) {
+        this.onStartActivityCallback = onStartActivityCallback
+    }
+
+    interface OnStartActivityCallback {
+        fun onStartActivityCallback(user: User)
     }
 
     companion object {

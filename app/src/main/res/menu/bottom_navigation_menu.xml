@@ -9,6 +9,10 @@
         android:icon="@drawable/ic_ar"
         android:title="@string/ar" />
     <item
+        android:id="@+id/navigation_exam"
+        android:icon="@drawable/ic_exam"
+        android:title="@string/exam" />
+    <item
         android:id="@+id/navigation_leaderboard"
         android:icon="@drawable/ic_leaderboard"
         android:title="@string/ranking" />

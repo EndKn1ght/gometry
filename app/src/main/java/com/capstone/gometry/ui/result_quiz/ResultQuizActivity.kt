@@ -69,8 +69,12 @@ class ResultQuizActivity : AppCompatActivity() {
         }
 
         binding.apply {
-            btnBackToMaterial.setOnClickListener { finish() }
-            btnRetake.setOnClickListener {
+            btnBackToMaterial.setOnClickListener {
+                it.isEnabled = false
+                finish()
+            }
+            btnRetake.setOnClickListener { view ->
+                view.isEnabled = false
                 Intent(this@ResultQuizActivity, QuizActivity::class.java).also {
                     it.putExtra(EXTRA_GEOMETRY_ID, geometryId)
                     startActivity(it)

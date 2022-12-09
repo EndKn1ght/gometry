@@ -90,11 +90,9 @@ class ProfileFragment : Fragment() {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = achievementAdapter
             }
-        } else {
-            binding?.apply {
-                rvAchievement.setVisible(false)
-                clEmptyAchievement.setVisible(true)
-            }
+        } else binding?.apply {
+            rvAchievement.setVisible(false)
+            clEmptyAchievement.setVisible(true)
         }
     }
 

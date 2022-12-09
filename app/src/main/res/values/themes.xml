@@ -50,6 +50,9 @@
     <style name="TextNormalBold" parent="TextBold">
         <item name="android:textSize">16sp</item>
     </style>
+    <style name="TextBigBold" parent="TextBold">
+        <item name="android:textSize">18sp</item>
+    </style>
     <style name="TextLabel" parent="TextBold">
         <item name="android:textSize">20sp</item>
     </style>

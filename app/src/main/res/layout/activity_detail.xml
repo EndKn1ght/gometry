@@ -5,15 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_100"
     android:overScrollMode="never"
     android:scrollbars="none"
-    android:background="@color/gray_100"
     android:fillViewport="true"
     tools:context="com.capstone.gometry.ui.detail.DetailActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp">
+        android:paddingBottom="24dp">
         <View
             android:layout_width="0dp"
             android:layout_height="150dp"
@@ -231,30 +231,16 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_play_ar"
+            style="@style/TextSmallBold"
+            android:id="@+id/btn_quiz"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="8dp"
-            android:padding="10dp"
-            android:text="@string/play_ar"
-            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="24dp"
+            android:padding="12dp"
+            android:text="@string/complete_quiz"
+            app:layout_constraintTop_toBottomOf="@id/cl_example"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btn_exam"
-            app:layout_constraintTop_toBottomOf="@id/cl_example" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_exam"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="24dp"
-            android:padding="10dp"
-            android:text="@string/quiz"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@id/btn_play_ar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_example" />
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

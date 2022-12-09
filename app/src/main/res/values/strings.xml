@@ -22,10 +22,13 @@
     <string name="theory">Teori</string>
     <string name="formula">Rumus</string>
     <string name="congrats_success">Selamat! Kamu Lulus</string>
+    <string name="congrats_succeed">Selamat! Kamu Berhasil</string>
+    <string name="congrats_not_succeed">Oops! Kamu Kurang Teliti</string>
     <string name="congrats_have_passed_before">Kamu Sudah Lulus!</string>
     <string name="congrats_failure">Maaf, Kamu Belum Lulus!</string>
     <string name="back_to_material">Kembali Ke Materi</string>
     <string name="retry">Coba Lagi</string>
+    <string name="point_will_get">%d Poin</string>
     <string name="you_get_point">Kamu Mendapat %d Poin</string>
     <string name="you_get_medal">Kamu Mendapat %s</string>
     <string name="material_list">Daftar Materi</string>
@@ -43,11 +46,20 @@
     <string name="current_point">%s Poin</string>
     <string name="achievement">Pencapaian</string>
     <string name="empty_achievement">Anda belum memiliki pencapaian apapun.</string>
-    <string name="message_empty_quiz">Maaf data kuis belum tersedia!</string>
+    <string name="empty_achievement_other_user">Belum ada pencapaian yang didapat.</string>
+    <string name="message_empty_quiz">Maaf data pertanyaan belum tersedia!</string>
     <string name="alert_error">Kesalahan</string>
     <string name="ranking">Peringkat</string>
     <string name="example">Contoh</string>
     <string name="answer">Jawab:</string>
+    <string name="complete_quiz">Kerjakan Kuis</string>
+    <string name="quiz_solved">Kuis Terselesaikan</string>
+    <string name="exam">Latihan</string>
+    <string name="list_exam_title">Daftar Latihan</string>
+    <string name="message_locked_exam">Anda harus menyelesaikan seluruh materi bangun ruang!</string>
+    <string name="message_unsupported_device">Perangkat yang anda gunakan tidak mendukung AR!</string>
+    <string name="title_setting">Pengaturan</string>
+    <string name="message_request_camera_permission">Apliksi ini memerlukan izin penggunaan kamera.</string>
 
     <!-- List of Geometry Data -->
     <string-array name="geometry_id">
@@ -156,5 +168,27 @@
         <item>@drawable/medal_beginner</item>
         <item>@drawable/medal_skilled</item>
         <item>@drawable/medal_proficient</item>
+    </string-array>
+
+    <!-- List of Exam Data -->
+    <string-array name="exam_id">
+        <item>beginner</item>
+        <item>skilled</item>
+        <item>proficient</item>
+    </string-array>
+    <string-array name="exam_icon">
+        <item>@drawable/medal_beginner</item>
+        <item>@drawable/medal_skilled</item>
+        <item>@drawable/medal_proficient</item>
+    </string-array>
+    <string-array name="exam_level">
+        <item>Level Pemula</item>
+        <item>Level Terampil</item>
+        <item>Level Mahir</item>
+    </string-array>
+    <string-array name="exam_point">
+        <item>25</item>
+        <item>50</item>
+        <item>100</item>
     </string-array>
 </resources>

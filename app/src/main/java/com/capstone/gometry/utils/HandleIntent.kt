@@ -5,7 +5,7 @@ import android.content.Intent
 import android.net.Uri
 
 object HandleIntent {
-    fun handlePlayAR(context: Context, model3dUrl: String) {
+    fun playAR(context: Context, model3dUrl: String) {
         val sceneViewer = Intent(Intent.ACTION_VIEW)
         val intentUri = Uri.parse("https://arvr.google.com/scene-viewer/1.0")
             .buildUpon()

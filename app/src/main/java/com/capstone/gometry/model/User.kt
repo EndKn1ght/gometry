@@ -1,5 +1,7 @@
 package com.capstone.gometry.model
 
+import java.io.Serializable
+
 data class User(
     val id: String? = null,
     val displayName: String? = null,
@@ -8,4 +10,4 @@ data class User(
     val point: Int? = null,
     val achievements: List<String>? = null,
     val geometries: List<String>? = null,
-)
+): Serializable

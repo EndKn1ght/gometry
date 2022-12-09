@@ -15,6 +15,11 @@
         android:label="PlayARFragment"
         tools:layout="@layout/fragment_play_ar"/>
     <fragment
+        android:id="@+id/navigation_exam"
+        android:name="com.capstone.gometry.ui.exam_list.ExamListFragment"
+        android:label="fragment_exam_list"
+        tools:layout="@layout/fragment_exam_list" />
+    <fragment
         android:id="@+id/navigation_leaderboard"
         android:name="com.capstone.gometry.ui.leaderboard.LeaderboardFragment"
         android:label="fragment_leaderboard"

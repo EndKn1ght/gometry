@@ -13,33 +13,28 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="24dp">
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cl_preview"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            app:cardCornerRadius="4dp"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="16dp">
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-            <ImageView
-                android:id="@+id/iv_preview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:src="@tools:sample/avatars"
-                tools:ignore="ContentDescription" />
-        </com.google.android.material.card.MaterialCardView>
+            app:layout_constraintStart_toStartOf="parent"
+            tools:src="@tools:sample/avatars"
+            tools:ignore="ContentDescription" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            app:layout_constraintStart_toEndOf="@id/cl_preview"
+            app:layout_constraintStart_toEndOf="@id/iv_icon"
             app:layout_constraintEnd_toStartOf="@id/iv_locked"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
             <com.google.android.material.textview.MaterialTextView
                 style="@style/TextSubHeading"
-                android:id="@+id/tv_name"
+                android:id="@+id/tv_level"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/gray_800"
@@ -50,14 +45,14 @@
                 app:layout_constraintBottom_toTopOf="@id/tv_point"
                 tools:text="@tools:sample/full_names" />
             <com.google.android.material.textview.MaterialTextView
-                style="@style/TextSmallBold"
+                style="@style/TextBigBold"
                 android:id="@+id/tv_point"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gray_800"
+                android:textColor="@color/purple_500"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_level"
                 tools:text="@string/default_point" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <ImageView

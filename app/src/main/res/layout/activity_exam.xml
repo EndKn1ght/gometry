@@ -9,7 +9,7 @@
     android:overScrollMode="never"
     android:scrollbars="none"
     android:fillViewport="true"
-    tools:context=".ui.quiz.QuizActivity">
+    tools:context=".ui.exam.ExamActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
