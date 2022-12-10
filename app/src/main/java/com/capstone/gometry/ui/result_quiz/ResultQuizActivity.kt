@@ -48,7 +48,7 @@ class ResultQuizActivity : AppCompatActivity() {
                 }
             mAchievementId.isNotEmpty() && achievement != null ->
                 binding.apply {
-                    ivImage.setImageFromResource(this@ResultQuizActivity, achievement.medal)
+                    ivImage.setImageResource(achievement.medal)
                     tvGreeting.text = getString(R.string.congrats_success)
                     tvPoint.text = String.format(getString(R.string.you_get_medal), achievement.name)
                     btnRetake.setVisible(false)

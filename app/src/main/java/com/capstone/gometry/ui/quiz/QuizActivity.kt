@@ -194,6 +194,8 @@ class QuizActivity : AppCompatActivity() {
         AlertDialog.Builder(this@QuizActivity).apply {
             setTitle(getString(R.string.alert_error))
             setMessage(getString(R.string.message_empty_quiz))
+            setCancelable(false)
+            setFinishOnTouchOutside(false)
             setNegativeButton(getString(R.string.ok)) { _, _ -> finish()}
             create()
             show()

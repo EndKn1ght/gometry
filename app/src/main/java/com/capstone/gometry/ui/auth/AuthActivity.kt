@@ -37,6 +37,8 @@ class AuthActivity : AppCompatActivity() {
                 val account = task.getResult(ApiException::class.java)!!
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) { showErrorOccurred() }
+        } else {
+            btnSignInWithGoogle.isEnabled = true
         }
     }
 
