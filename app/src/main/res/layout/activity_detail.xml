@@ -91,7 +91,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_subtitle_theory"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
-            <com.capstone.gometry.view.JustifiedTextView
+            <com.codesgood.views.JustifiedTextView
                 style="@style/Text"
                 android:id="@+id/tv_theory"
                 android:layout_width="match_parent"
@@ -198,7 +198,7 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="16dp">
-                <com.capstone.gometry.view.JustifiedTextView
+                <com.codesgood.views.JustifiedTextView
                     style="@style/Text"
                     android:id="@+id/tv_example_question"
                     android:layout_width="0dp"
