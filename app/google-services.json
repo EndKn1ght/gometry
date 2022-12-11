@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "29386881798",
+    "firebase_url": "https://gometry-3f294-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "gometry-3f294",
+    "storage_bucket": "gometry-3f294.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29386881798:android:5282fbb35b589bbfda7c87",
+        "android_client_info": {
+          "package_name": "com.capstone.gometry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29386881798-c0efsa4ikdlbnkauiiesb5o17rjuri4k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.capstone.gometry",
+            "certificate_hash": "4a9e98010b04ab116a2ebb2f480b3223e2d4d048"
+          }
+        },
+        {
+          "client_id": "29386881798-sucaivpqioese43sohqnqoee6g1dj1lm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnFJtxckfQtBqi46feH2tAMHfi2bMJbYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29386881798-sucaivpqioese43sohqnqoee6g1dj1lm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,194 @@
+<resources>
+    <string name="app_name">GOMetry</string>
+    <string name="home">Beranda</string>
+    <string name="profile">Profil</string>
+    <string name="user_profile">Profil Pengguna</string>
+    <string name="dummy_theory">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="sign_in_with_google">Masuk Dengan Google</string>
+    <string name="auth_caption">Mari mulai belajar geometri</string>
+    <string name="sign_out">Keluar</string>
+    <string name="error_sign_in">Gagal masuk!</string>
+    <string name="success_sign_in">Berhasil masuk!</string>
+    <string name="message_confirmation">Apa kamu yakin?</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="check">Periksa</string>
+    <string name="_continue">Lanjutkan</string>
+    <string name="finish">Selesai</string>
+    <string name="surface_area">Luas Permukaan</string>
+    <string name="volume">Volume</string>
+    <string name="play_ar">Mainkan AR</string>
+    <string name="close">Keluar</string>
+    <string name="theory">Teori</string>
+    <string name="formula">Rumus</string>
+    <string name="congrats_success">Selamat! Kamu Lulus</string>
+    <string name="congrats_succeed">Selamat! Kamu Berhasil</string>
+    <string name="congrats_not_succeed">Oops! Kamu Kurang Teliti</string>
+    <string name="congrats_have_passed_before">Kamu Sudah Lulus!</string>
+    <string name="congrats_failure">Maaf, Kamu Belum Lulus!</string>
+    <string name="back_to_material">Kembali Ke Materi</string>
+    <string name="retry">Coba Lagi</string>
+    <string name="point_will_get">%d Poin</string>
+    <string name="you_get_point">Kamu Mendapat %d Poin</string>
+    <string name="you_get_medal">Kamu Mendapat %s</string>
+    <string name="material_list">Daftar Materi</string>
+    <string name="default_point">100 Poin</string>
+    <string name="geometry_passed">Lulus</string>
+    <string name="alert_empty_selected_option">Jawaban Kosong!</string>
+    <string name="message_empty_selected_option">Silakan pilih salah satu opsi</string>
+    <string name="ok">Oke</string>
+    <string name="quiz">Kuis</string>
+    <string name="ar">AR</string>
+    <string name="locked">Terkunci</string>
+    <string name="message_locked_geometry">Anda harus lulus kuis bangun ruang sebelumnya!</string>
+    <string name="label_total_point">Total Poin</string>
+    <string name="label_total_medal">Total Medali</string>
+    <string name="current_point">%s Poin</string>
+    <string name="achievement">Pencapaian</string>
+    <string name="empty_achievement">Anda belum memiliki pencapaian apapun.</string>
+    <string name="empty_achievement_other_user">Belum ada pencapaian yang didapat.</string>
+    <string name="message_empty_quiz">Maaf data pertanyaan belum tersedia!</string>
+    <string name="alert_error">Kesalahan</string>
+    <string name="ranking">Peringkat</string>
+    <string name="example">Contoh</string>
+    <string name="answer">Jawab:</string>
+    <string name="complete_quiz">Kerjakan Kuis</string>
+    <string name="quiz_solved">Kuis Terselesaikan</string>
+    <string name="exam">Latihan</string>
+    <string name="list_exam_title">Daftar Latihan</string>
+    <string name="message_locked_exam">Anda harus menyelesaikan seluruh materi bangun ruang!</string>
+    <string name="message_unsupported_device">Perangkat yang anda gunakan tidak mendukung AR!</string>
+    <string name="title_setting">Pengaturan</string>
+    <string name="message_request_camera_permission">Apliksi ini memerlukan izin penggunaan kamera.</string>
+
+    <!-- List of Geometry Data -->
+    <string-array name="geometry_id">
+        <item>cube</item>
+        <item>beam</item>
+        <item>triangular_pyramid</item>
+        <item>ball</item>
+        <item>cone</item>
+        <item>tube</item>
+        <item>triangular_prism</item>
+    </string-array>
+    <string-array name="geometry_name">
+        <item>Kubus</item>
+        <item>Balok</item>
+        <item>Limas Segitiga</item>
+        <item>Bola</item>
+        <item>Kerucut</item>
+        <item>Tabung</item>
+        <item>Prisma Segitiga</item>
+    </string-array>
+    <string-array name="geometry_preview">
+        <item>@drawable/preview_cube</item>
+        <item>@drawable/preview_beam</item>
+        <item>@drawable/preview_triangular_pyramid</item>
+        <item>@drawable/preview_ball</item>
+        <item>@drawable/preview_cone</item>
+        <item>@drawable/preview_tube</item>
+        <item>@drawable/preview_triangular_prism</item>
+    </string-array>
+    <string-array name="geometry_image">
+        <item>@drawable/image_cube</item>
+        <item>@drawable/image_beam</item>
+        <item>@drawable/image_triangular_pyramid</item>
+        <item>@drawable/image_ball</item>
+        <item>@drawable/image_cone</item>
+        <item>@drawable/image_tube</item>
+        <item>@drawable/image_triangular_prism</item>
+    </string-array>
+    <string-array name="geometry_theory">
+        <item>Kubus adalah bangun ruang tiga dimensi yang dibatasi oleh enam bidang sisi yang kongruen berbentuk bujur sangkar. Kubus memiliki 6 sisi, 12 rusuk, dan 8 titik sudut.</item>
+        <item>Balok adalah bangun ruang tiga dimensi yang dibentuk oleh tiga pasang persegi atau persegi panjang, dengan paling tidak satu pasang di antaranya berukuran berbeda. Balok memiliki 6 sisi, 12 rusuk, dan 8 titik sudut.</item>
+        <item>Limas segitiga adalah bangun ruang yang memiliki bidang alas dengan bentuk segitiga. Limas segitiga menjadi bangun yang dibatasi oleh sebuah alas bidang banyak dan bidang segitiga yang alasnya berimpit dengan sisi-sisi bidang banyak tersebut. Sedangkan titik puncaknya berhimpit disebuah titik yang terletak diluar bidang banyak tersebut.</item>
+        <item>Bola adalah bangun ruang tiga dimensi yang terbentuk dari himpunan titik dalam dimensi tiga yang memiliki jarak sama terhadap titik tertentu yang disebut pusat bola.</item>
+        <item>Kerucut adalah bangun ruang yang mempunyai sebuah alas yang berbentuk lingkaran dengan selimut yang memiliki irisan dari lingkaran.\nSisi tegak pada kerucut ini berupa bidang miring yang disebut selimut kerucut. Sisi lainnya disebut alas kerucut. Maka dapat disimpulkan, bahwa kerucut hanya memiliki 2 sisi, dan satu rusuk.</item>
+        <item>Tabung adalah bangun ruang tiga dimensi yang dibentuk oleh 2 buah lingkaran identik yang sejajar dan sebuah persegi panjang yang mengelilingi kedua lingkaran tersebut.</item>
+        <item>Prisma merupakan bentuk bangun ruang yang identik dengan semua sisi semuanya datar. Prisma memiliki beberapa jenis, dimana nama prisma sesuai dengan bentuk sisi alas dan tutupnya.</item>
+    </string-array>
+    <string-array name="geometry_surface_area">
+        <item>@drawable/cube_surface_area</item>
+        <item>@drawable/beam_surface_area</item>
+        <item>@drawable/triangular_pyramid_surface_area</item>
+        <item>@drawable/ball_surface_area</item>
+        <item>@drawable/cone_surface_area</item>
+        <item>@drawable/tube_surface_area</item>
+        <item>@drawable/triangular_prism_surface_area</item>
+    </string-array>
+    <string-array name="geometry_volume">
+        <item>@drawable/cube_volume</item>
+        <item>@drawable/beam_volume</item>
+        <item>@drawable/triangular_pyramid_volume</item>
+        <item>@drawable/ball_volume</item>
+        <item>@drawable/cone_volume</item>
+        <item>@drawable/tube_volume</item>
+        <item>@drawable/triangular_prism_volume</item>
+    </string-array>
+    <string-array name="geometry_example_question">
+        <item>Diketahui sebuah kubus yang memiliki sisi berukuran 4 cm. Hitunglah luas permukaan dan volume kubus tersebut!</item>
+        <item>Diketahui sebuah balok yang memiliki panjang 4 cm, lebar 2 cm, dan tinggi 6 cm. Hitunglah luas permukaan dan volume balok tersebut!</item>
+        <item>Diketahui sebuah limas segitiga yang memiliki alas segitiga yang sama besar 6 cm, serta tinggi segitiga yang sama besar 4 cm, dan tinggi limas 10 cm. Hitunglah luas permukaan dan volume limas segitiga tersebut!</item>
+        <item>Diketahui sebuah bola yang memiliki jari-jari berukuran 7 cm. Hitunglah luas permukaan dan volume bola tersebut!</item>
+        <item>Diketahui sebuah kerucut yang memiliki jari-jari 7 cm, tinggi 5 cm, dan garis pelukis 9 cm. Hitunglah luas permukaan dan volume kerucut tersebut!</item>
+        <item>Diketahui sebuah tabung yang memiliki jari-jari 7 cm dan tinggi 10 cm. Hitunglah luas permukaan dan volume tabung tersebut!</item>
+        <item>Diketahui sebuah prisma segitiga yang memiliki panjang alas 7 cm, tinggi segitia 10 cm, dan tinggi prisma 10 cm. Hitunglah luas permukaan dan volume tabung tersebut!</item>
+    </string-array>
+    <string-array name="geometry_example_answer">
+        <item>@drawable/cube_example</item>
+        <item>@drawable/beam_example</item>
+        <item>@drawable/triangular_pyramid_example</item>
+        <item>@drawable/ball_example</item>
+        <item>@drawable/cone_example</item>
+        <item>@drawable/tube_example</item>
+        <item>@drawable/triangular_prism_example</item>
+    </string-array>
+    <string-array name="geometry_model_3d">
+        <item>cube.glb</item>
+        <item>beam.glb</item>
+        <item>triangular_pyramid.glb</item>
+        <item>ball.glb</item>
+        <item>cone.glb</item>
+        <item>tube.glb</item>
+        <item>triangular_prism.glb</item>
+    </string-array>
+
+    <!-- List of Achievement Data -->
+    <string-array name="achievement_id">
+        <item>beginner</item>
+        <item>skilled</item>
+        <item>proficient</item>
+    </string-array>
+    <string-array name="achievement_name">
+        <item>Medali Pemula</item>
+        <item>Medali Terampil</item>
+        <item>Medali Mahir</item>
+    </string-array>
+    <string-array name="achievement_medal">
+        <item>@drawable/medal_beginner</item>
+        <item>@drawable/medal_skilled</item>
+        <item>@drawable/medal_proficient</item>
+    </string-array>
+
+    <!-- List of Exam Data -->
+    <string-array name="exam_id">
+        <item>beginner</item>
+        <item>skilled</item>
+        <item>proficient</item>
+    </string-array>
+    <string-array name="exam_icon">
+        <item>@drawable/medal_beginner</item>
+        <item>@drawable/medal_skilled</item>
+        <item>@drawable/medal_proficient</item>
+    </string-array>
+    <string-array name="exam_level">
+        <item>Level Pemula</item>
+        <item>Level Terampil</item>
+        <item>Level Mahir</item>
+    </string-array>
+    <string-array name="exam_point">
+        <item>25</item>
+        <item>50</item>
+        <item>100</item>
+    </string-array>
+</resources>
